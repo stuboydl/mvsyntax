@@ -1,6 +1,8 @@
-# UniVerse MV Basic Cheat Sheet
+# Rocket UniVerse (U2) mvasic cheat sheet
 
 Scraped from the UV Basic Commands Ref v11.4.1 Aug 2023 [UNV-1141-BASR-1]
+
+Keywords are case insensitive eg ACTIVATEKEY = ActivateKey = activatekey
 
 ## Operators
 
@@ -34,7 +36,7 @@ NOT(expression)
 ### Pattern Matching Operators
 
 ~~~ mvbasic
-expression MATCH[ES] pattern
+expression MATCH pattern  ;* MATCHES
 ~~~
 
 ### Relational Operators
@@ -56,7 +58,7 @@ expression[ [start,] length]
 expression[ delimiter, occurrence, fields] ;* FIELD(delimiter, occurrence, fields)
 ~~~
 
-### Dynamic Array Operators
+### Dynamic Array Operators (aka vector operators)
 
 ~~~ mvbasic
 ADDS(exp1, exp2)
