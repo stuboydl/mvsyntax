@@ -1,4 +1,4 @@
-# Rocket UniVerse (U2) mvasic cheat sheet
+# Rocket UniVerse (U2) mvbasic cheat sheet
 
 Scraped from the UV Basic Commands Ref v11.4.1 Aug 2023 [UNV-1141-BASR-1]
 
