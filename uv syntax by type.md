@@ -1,4 +1,4 @@
-# Syn
+# Rocket UniVerse (U2) mvbasic syntax by type
 
 ## Compiler directives
 
