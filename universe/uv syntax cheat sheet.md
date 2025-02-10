@@ -60,7 +60,7 @@ expression[ [start,] length]
 expression[ delimiter, occurrence, fields] ;* FIELD(delimiter, occurrence, fields)
 ~~~
 
-### Dynamic Array Logical and Relational Operators (aka vector operators)
+### Dynamic Array Logical and Relational Operators
 
 ~~~ mvbasic
 ADDS(exp1, exp2)

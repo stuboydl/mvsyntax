@@ -1,0 +1,33 @@
+{
+    "name": "Rocket UniVerse (U2) mvBASIC",
+    "scopeName": "source.mvbasic",
+    "fileTypes": ["mvb", "mvbasic"],
+    "patterns": [
+        {
+            "name": "comment.line",
+            "match": "(\\$\\*|!|REM).*"
+        },
+        {
+            "name": "keyword.control.directive",
+            "match": "(#INCLUDE|\\$CHAIN|\\$COPYRIGHT|\\$DEFINE|\\$EJECT|\\$IFDEF|\\$IFNDEF)"
+        }
+    ],
+    "repository": {
+        "comment": {
+            "patterns": [
+                {
+                    "name": "comment.line",
+                    "match": "(\\$\\*|!|REM).*"
+                }
+            ]
+        },
+        "directives": {
+            "patterns": [
+                {
+                    "name": "keyword.control.directive",
+                    "match": "(#INCLUDE|\\$CHAIN|\\$COPYRIGHT|\\$DEFINE|\\$EJECT|\\$IFDEF|\\$IFNDEF)"
+                }
+            ]
+        }
+    }
+}
