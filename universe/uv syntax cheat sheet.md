@@ -2,6 +2,8 @@
 
 Scraped from the UV Basic Commands Ref v11.4.1 Aug 2023 [UNV-1141-BASR-1]
 
+Simple syntax listing. See documentation for more info
+
 Keywords are case insensitive eg ACTIVATEKEY = ActivateKey = activatekey
 
 ## Operators
@@ -58,7 +60,7 @@ expression[ [start,] length]
 expression[ delimiter, occurrence, fields] ;* FIELD(delimiter, occurrence, fields)
 ~~~
 
-### Dynamic Array Operators (aka vector operators)
+### Dynamic Array Logical and Relational Operators (aka vector operators)
 
 ~~~ mvbasic
 ADDS(exp1, exp2)
@@ -66,7 +68,6 @@ ANDS(exp1, exp2)
 CATS(exp1, exp2)
 DIVS(exp1, exp2)
 EQS(exp1, exp2)
-FIELDS(exp1, p1, p2, p3)
 GES(exp1, exp2)
 GTS(exp1, exp2)
 IFS(exp1, exp2, m3)
@@ -113,7 +114,7 @@ ACTIVATEKEY key.id, password [ON hostname]
 addAuthenticationRule(context, ServerOrClient, Rule, RuleString)
 addCertificate(certPath, usedAs, format, algorithm, context, p12pass)
 addRequestParameter(request_handle, parameter_name, parameter_value, content_handling)
-ADDS(array1, array2)
+ADDS(dynamic.array1, dynamic.array2)
 ALPHA(expression)
 amInitialize(hSession, appName, policyName, reasonCode)
 amReceiveMsg(hSession, receiverName, policyName, selMsgName, maxMsgLen,dataLen, data, rcvMsgName, reasonCode[,recMsgOption])
@@ -123,7 +124,7 @@ amSendRequest(hSession, senderName, policyName, responseName, data,sndMsgName, r
 amSendResponse(hSession, senderName, policyName, rcvMsgName, data,sndMsgName, reasonCode)
 amTerminate(hSession, policyName, reasonCode)
 analyzeCertificate(cert, format, result, p12pass)
-ANDS(array1, array2)
+ANDS(dynamic.array1, dynamic.array2)
 ASCII(expression)
 ASIN(expression)
 ASSIGNED(variable)
@@ -153,7 +154,7 @@ BYTELEN(expression)
 BYTETYPE(value)
 BYTEVAL(expression [, n] )
 CALL name [([MAT] argument [, [MAT] argument …])]
-CATS(array1, array2)
+CATS(dynamic.array1, dynamic.array2)
 CENTURY.PIVOT(year | nn )
 CHAIN command
 CHANGE(expression, substring, replacement [,occurrence [,begin]] )
@@ -163,6 +164,7 @@ CHECKSUM(string)
 CLEAR [COMMON]
 CLEARCOMMON [/common.label/]
 CLEARDATA
+ClearDiagnostics()
 CLEARFILE [file.variable] [ON ERROR statements] [LOCKED statements]
 CLEARPROMPTS
 CLEARSELECT [ALL | list.variable]
@@ -212,7 +214,7 @@ DIMENSION vector (subscript) [, vector (subscript) …]
 DISABLEDEC filename [, multilevel-filename], {ALL |field_list} [ON ERROR statements]
 DISPLAY [print.list]
 DIV(dividend, divisor)
-DIVS(array1, array2)
+DIVS(dynamic.array1, dynamic.array2)
 DOWNCASE(expression)
 DQUOTE(expression)
 DTX(number [,size] )
@@ -225,7 +227,7 @@ END
 ENTER subroutine
 ENTER @variable
 EOF(ARG.)
-EQS(array1, array2)
+EQS(dynamic.array1, dynamic.array2)
 EQU symbol TO expression [,symbol TO expression …]
 EQUATE symbol TO expression [,symbol TO expression …]
 EQU symbol LIT[ERALLY] string [,symbol LIT string …]
@@ -265,15 +267,18 @@ FOR variable = start TO end [STEP increment] [loop.statements] [CONTINUE | EXIT]
 FORMLIST [variable] [TO list.number] [ON ERROR statements]
 FSUB(number1, number2)
 FUNCTION [name] [( [MAT] variable [, [MAT] variable …] )]
+GARBAGECOLLECT ?
+GCI ?
 GCDISTANCE(lat1,lon1,lat2,lon2)
 generateKey(privKey, pubKey, format, keyLoc, algorithm, keyLength, passPhrase, paramFile)
 generateKey(privKey, pubKey, format, keyLoc, algorithm, keyLength, passPhrase, paramFile)
-GES(array1, array2)
+GES(dynamic.array1, dynamic.array2)
 GET read.var[, length] [SETTING read.count] FROM device [UNTIL eop.char.list ] [RETURNING last.char.read ] [WAITING seconds ] [THEN statements ] [ELSE statements]
 GETX read.var[, length] [SETTING read.count] FROM device [UNTIL eop.char.list ] [RETURNING last.char.read ] [WAITING seconds ] [THEN statements ] [ELSE statements]
 getCipherSuite(context,ciphers)
 getIpv([networkexpr])
 GET(ARG. [,arg#] ) variable [THEN statements] [ELSE statements]
+GetDiagnostics()
 getHTTPDefault(option, value)
 GETLIST listname [TO list.number] [SETTING variable] {THEN statements [ELSE statements] | ELSE statements}
 GETLOCALE(category)
@@ -289,7 +294,7 @@ GOTO statement.label [:]
 GO TO statement.label [:]
 GROUP(string, delimiter, occurrence [,num.substr] )
 GROUPSTORE new.string IN string USING start, n [ ,delimiter]
-GTS(array1, array2)
+GTS(dynamic.array1, dynamic.array2)
 HEADING [ON print.channel] heading
 HEADINGE [ON print.channel] heading
 HEADINGN [ON print.channel] heading
@@ -308,7 +313,7 @@ INDEXS(dynamic.array, substring, occurrence)
 INDICES(file.variable [,indexname])
 initSecureServerSocket(name_or_IP, port, backlog, svr_socket, context)
 initServerSocket(name_or_IP, port, backlog, svr_socket)
-INMAT([array] )
+INMAT([dim.array])
 INPUT variable [,length] [:] [_]
 INPUT @ (col, row) [, | :] variable [,length] [:] [format] [_]
 INPUTIF @ (col, row) [, | :] variable [,length] [:] [format] [_] [THEN statements] [ELSE statements]
@@ -334,7 +339,7 @@ LEN(string)
 LENDP(string [,mapname] )
 LENS(dynamic.array)
 LENSDP(dynamic.array [, mapname] )
-LES(array1, array2)
+LES(dynamic.array1, dynamic.array2)
 LET variable = expression
 LN(expression)
 loadSecurityContext(context, name, passPhrase)
@@ -345,30 +350,36 @@ LOCATE(expression, dynamic.array [, field# [, value#]] ; variable [;seq] )  { TH
 LOCK expression [THEN statements] [ELSE statements]
 LOOP [CONTINUE | EXIT] [{WHILE | UNTIL} expression [DO]] [loop.statements] [CONTINUE | EXIT] REPEAT
 LOWER(expression)
-LTS(array1, array2)
-MAT array = expression
-MAT array1 = MAT array2
-MATBUILD dynamic.array FROM array [,start [,end]] [USING delimiter]
+LTS(dynamic.array1, dynamic.array2)
+MAT dim.array = expression
+MAT dim.array1 = MAT dim.array2
+MATBUILD dynamic.array FROM dim.array [,start [,end]] [USING delimiter]
 MATCHFIELD(string, pattern, field)
-MATPARSE array FROM dynamic.array [,delimiter]
-MATPARSE array [,start [,end]] FROM dynamic.array [USING delimiter] [SETTING elements]
-MATREAD array FROM [file.variable,] record.ID [ON ERROR statements] {THEN statements [ELSE statements] | ELSE statements}
-MATREADL array FROM [file.variable,] record.ID [ON ERROR statements] [LOCKED statements] {THEN statements [ELSE statements] | ELSE statements}
-MATREADU array FROM [file.variable,] record.ID [ON ERROR statements] [LOCKED statements] {THEN statements [ELSE statements] | ELSE statements}
-MATWRITE array ON | TO [file.variable,] record.ID [ON ERROR statements] [LOCKED statements] [THEN statements] [ELSE statements]
-MATWRITEU array ON | TO [file.variable,] record.ID [ON ERROR statements] [LOCKED statements] [THEN statements] [ELSE statements]
+MATPARSE dim.array FROM dynamic.array [,delimiter]
+MATPARSE dim.array [,start [,end]] FROM dynamic.array [USING delimiter] [SETTING elements]
+MATREAD dim.array FROM [file.variable,] record.ID [ON ERROR statements] {THEN statements [ELSE statements] | ELSE statements}
+MATREADL dim.array FROM [file.variable,] record.ID [ON ERROR statements] [LOCKED statements] {THEN statements [ELSE statements] | ELSE statements}
+MATREADU dim.array FROM [file.variable,] record.ID [ON ERROR statements] [LOCKED statements] {THEN statements [ELSE statements] | ELSE statements}
+MATWRITE dim.array ON | TO [file.variable,] record.ID [ON ERROR statements] [LOCKED statements] [THEN statements] [ELSE statements]
+MATWRITEU dim.array ON | TO [file.variable,] record.ID [ON ERROR statements] [LOCKED statements] [THEN statements] [ELSE statements]
 MAXIMUM(dynamic.array)
 MINIMUM(dynamic.array)
 MOD(dividend, divisor)
-MODS(array1, array2)
+MODS(dynamic.array1, dynamic.array2)
 MQCLOSE(hConn, hObj, options)
 MQCONN(qManager, hConn)
 MQDISC(hConn)
-MULS(array1, array2)
+MQGET(hConn, hObj, msgDesc, getMsgOpts, msgBufferLen, msg,  msgDataLen)
+MQGETERROR(reasonCode, reasonMessage)
+MQINQ(hConn, hObj, selectors, attrs)
+MQOPEN(hConn, objDesc, options, hObj)
+MQPUT(hConn, hObj, msgDesc, putMsgOpts, msg)
+MQPUT1(hConn, objDesc, msgDesc, putMsgOpts, msg)
+MULS(dynamic.array1, dynamic.array2)
 NAP [milliseconds]
 NEG(number)
 NEGS(dynamic.array)
-NES(array1, array2)
+NES(dynamic.array1, dynamic.array2)
 NEXT [variable]
 NOBUF file.variable {THEN statements [ELSE statements] | ELSE statements}
 NOT(expression)
@@ -390,7 +401,7 @@ OPENSEQ pathname TO file.variable [USING dynamic.array] [ON ERROR statements] [L
 openSecureSocket(name_or_IP, port, mode, timeout, socket_handle, context)
 openSocket(name_or_IP, port, mode, timeout, socket_handle)
 OpenXMLData(xml_handle,xml_data_extraction_rule, xml_data_handle)
-ORS(array1, array2)
+ORS(dynamic.array1, dynamic.array2)
 PAGE [ON print.channel] [page#]
 PERFORM command
 PRECISION expression
@@ -408,7 +419,7 @@ protocolLogging(log_file, log_action, log_level)
 PWR(expression, power)
 PyCall(PyCallableObject[,arg1, arg2, ...])
 PyCallFunction(moduleName, functionName[, arg1, arg2, ...])
-PyCallMethod(pyobject, methodName [,arg1, arg2, ...]
+PyCallMethod(pyobject, methodName [,arg1, arg2, ...])
 PyGetAttr(pyobject, attrName)
 PyImport(moduleName)
 PySetAttr(pyobject, attrName, value)
@@ -419,7 +430,7 @@ READ  dynamic.array  FROM [file.variable,] record.ID [ON ERROR  statements] { TH
 READ{L|U} dynamic.array FROM [file.variable ,] record.ID [ON ERROR  statements] [LOCKED  statements] { THEN  statements [ELSE  statements] | ELSE  statements } 
 READV dynamic.array FROM [file.variable ,] record.ID ,  field# [ON ERROR  statements] { THEN  statements [ELSE  statements] | ELSE  statements } 
 READV{L|U} dynamic.array  FROM [file.variable ,] record.ID , field# [ON ERROR  statements] [LOCKED  statements] { THEN  statements [ELSE  statements] | ELSE  statements } 
-READBLK variable FROM file.variable, blocksize THEN statements [ELSE statements] | ELSE statements }
+READBLK variable FROM file.variable, blocksize { THEN statements [ELSE statements] | ELSE statements }
 READLIST dynamic.array [FROM list.number] { THEN statements [ELSE statements] | ELSE statements }
 READNEXT dynamic.array [,value [,subvalue]] [FROM list] {THEN statements [ELSE statements] | ELSE statements}
 READSEQ variable FROM file.variable [ON ERROR statements] {THEN statements [ELSE statements] | ELSE statements}
@@ -468,6 +479,7 @@ SEQS(dynamic.array)
 setAuthenticationDepth(context, depth, ServerOrClient)
 setCipherSuite(context,cipherSpecs)
 setClientAuthentication(context,option)
+SetDiagnostics(text)
 setIpv(option[,sockettype])
 setPrivateKey(key, format, keyLoc, passPhrase, validate, context, p12pass)
 setRandomSeed(inFiles, outFile, length, context)
@@ -499,7 +511,38 @@ SOAPSubmitRequest(Request, timeout, respHeaders, respData, soapStatus)
 SOUNDEX(expression)
 SPACE(expression)
 SPACES(dynamic.array)
-SPLICE(array1, expression, array2)
+SPLICE(dynamic.array1, expression, dynamic.array2)
+SQLAllocConnect(bci.env, connect.env)
+SQLAllocEnv(bci.env)
+SQLAllocStmt(connect.env, statement.env)
+SQLBindCol(statement.env, col#, data.type, column)
+SQLBindParameter( statement.env, mrk#, data.type, sql.type, prec, scale, param [ , param.type ] )
+SQLCancel(statement.env)
+SQLColAttributes(statement.env, col#, col.attribute, text.var, num.var)
+SQLColumns(statement.env, schema, owner, tablename, columnname)
+SQLConnect(connect.env, data.source, logon1, logon2)
+SQLDescribeCol(statement.env, col#, col.name, sql.type, prec, scale, null)
+SQLDisconnect(connect.env)
+SQLError(bci.env, connect.env, statement.env, sqlstate, dbms.code, error)
+SQLExecDirect(statement.env, statement)
+SQLExecute(statement.env)
+SQLFetch(statement.env)
+SQLFreeConnect(connect.env)
+SQLFreeEnv(bci.env)
+SQLFreeStmt(statement.env, option)
+SQLGETDATA(stmt.env, loc, type, retvar, len)
+SQLGetInfo(connect.env, info.type, info.value)
+SQLGetTypeInfo(statement.env, sql.type)
+SQLNumParams(statement.env, parameters)
+SQLNumResultCols(statement.env, cols)
+SQLParamOptions(statement.env, option, value)
+SQLPrepare(statement.env, statement)
+SQLRowCount(statement.env, rows)
+SQLSetConnectOption(connect.env, option, value)
+SQLSpecialColumns(statement.env, col.type, schema, owner,  tablename, IDscope, null)
+SQLStatistics(statement.env, schema, owner, tablename, index.type, accuracy)
+SQLTables(statement.env, schema, owner, tablename, type)
+SQLTransact(bci.env, connect.env, type)
 SQRT(expression)
 SQUOTE(expression )
 SSELECT [variable] [TO list.number] [ON ERROR statements]
@@ -515,12 +558,12 @@ STRS(dynamic.array, repeat)
 submitRequest(request_handle, time_out, post_data,response_headers,response_data, http_status)
 SUBR(name, [argument [,argument …]] )
 SUBROUTINE [name] [([MAT] variable [, [MAT] variable …] )]
-SUBS(array1, array2)
+SUBS(dynamic.array1, dynamic.array2)
 SUBSTRINGS(dynamic.array, start, length)
 SUM(dynamic.array)
 SUMMATION(dynamic.array)
 SWAP variable1, variable2
-SWAP MAT variable1, MAT variable2
+SWAP MAT dim.array, MAT dim.array
 SYSTEM(expression)
 TABSTOP expression
 TAN(expression)
@@ -608,6 +651,7 @@ XDOMGetNodeType(nodeHandle, nodeType)
 XDOMGetNodeValue(nodeHandle, nodeValue)
 XDOMGetOwnerDocument(nodeHandle, domHandle)
 XDOMGetUserData(nodeHandle, userData)
+XDOMInsert(xmlHandle, xpathString, nsMap, nodeHandle, dupFlag)
 XDOMItem(nodeListHandle, index, dataHandle, dataType)
 XDOMLength(nodeListHandle, length)
 XDOMLocate(xmlHandle, xpathString, nsMap, nodeHandle)
@@ -630,6 +674,9 @@ XMAPReadNext(XMAPhandle, file_name, record)
 XMAPToXMLDoc(XMAPhandle, xmlfile, doc_flag)
 XMLError(errmsg)
 XMLExecute(cmd, options, xmlvar, xsdvar)
+XMLSetOptions("options")
+XMLGetOptions(outOptions[, delimiterString])
+XMLGetOptionValue(optionName, outOptionValue)
 XMLTODB(xml_document, doc_flag, u2xmapping_rules, u2xmap_ flag, status)
 XTD(string)
 ~~~
@@ -764,7 +811,6 @@ XTD(string)
   - ASSIGN _int_ TO SYSTEM(1010) changes active printer channel top margin to _int_
   - ASSIGN _int_ TO SYSTEM(1011) changes active printer channel bottom margin to _int_
 
-
 - **ASSIGN _int_ TO SYSTEM(225)** changes active USERNO to _int_
 
 - **ASSIGN _bool_ TO SYSTEM(1017)** changes how Type19 records are read/written.
@@ -782,7 +828,7 @@ XTD(string)
     <2> custom select-list-active prompt _string_
     <3> custom command-continuation prompt _string_
 
-### SYSTEM() functions TBC
+## other SYSTEM() functions TBC
 
   44  returns the # of processes (not seats in use)
   51  device license info for SB+
@@ -807,3 +853,69 @@ ASSIGN TO SYSTEM(3001) through SYSTEM(3005) to fire counters for the Windows NT 
 9001  returns name of current subroutine -- actually name of current object path in SYSTEM(9001)<1,2>.
       The dynamic array returned contains the whole stack of object paths. Aborts if called by UO.NET.
 9010  Returns database type UD, UV, UD.PE or UV.PE (udt 7.1.5 or later)
+
+## BASIC subroutines TBC
+
+|Subroutine                                                                      |Equivalent Function |
+|-                                                                               |-                   |
+| !ASYNC(key, line, data, count, carrier) ;*(!AMLC)                              |                    |
+| !EDIT.INPUT(keys, wcol, wrow, wwidth, buffer, startpos, bwidth, ftable, code)  |                    |
+| !ERRNO(variable)                                                               |                    |
+| !FCMP(result, number1, number2)                                                |                    |
+| !GET.KEY(string, code)                                                         |                    |
+| !GET.PARTNUM subroutine                                                        |                    |
+| !GET.PATHNAME subroutine                                                       |                    |
+| !GET.USER.COUNTS subroutine                                                    |                    |
+| !GETPU subroutine                                                              |                    |
+| !INLINE.PROMPTS subroutine                                                     |                    |
+| !INTS subroutine                                                               |                    |
+| !MAKE.PATHNAME subroutine                                                      |                    |
+| !MATCHES subroutine                                                            |                    |
+| !MESSAGE subroutine                                                            |                    |
+| !PACK.FNKEYS subroutine                                                        |                    |
+| !REPORT.ERROR subroutine                                                       |                    |
+| !SET.PTR subroutine                                                            |                    |
+| !SETPU subroutine                                                              |                    |
+| !TIMDAT subroutine                                                             |                    |
+| !USER.TYPE subroutine                                                          |                    |
+| !VOC.PATHNAME subroutin                                                        |                    |
+| !ADDS                                                                          | ADDS               |
+| !ANDS                                                                          | ANDS               |
+| !CATS                                                                          | CATS               |
+| !CHARS                                                                         | CHARS              |
+| !CLEAR.PROMPTS                                                                 | CLEARPROMPTS       |
+| !COUNTS                                                                        | COUNTS             |
+| !DISLEN                                                                        | LENDP              |
+| !DIVS                                                                          | DIVS               |
+| !EQS                                                                           | EQS                |
+| !FADD                                                                          | FADD               |
+| !FDIV                                                                          | FDIV               |
+| !FIELDS                                                                        | FIELDS             |
+| !FMTS                                                                          | FMTS               |
+| !FMUL                                                                          | FMUL               |
+| !FOLD                                                                          | FOLD               |
+| !FSUB                                                                          | FSUB               |
+| !GES                                                                           | GES                |
+| !GTS                                                                           | GTS                |
+| !ICONVS                                                                        | ICONVS             |
+| !IFS                                                                           | IFS                |
+| !INDEXS                                                                        | INDEXS             |
+| !LENS                                                                          | LENS               |
+| !LES                                                                           | LES                |
+| !LTS                                                                           | LTS                |
+| !MAXIMUM                                                                       | MAXIMUM            |
+| !MINIMUM                                                                       | MINIMUM            |
+| !MODS                                                                          | MODS               |
+| !MULS                                                                          | MULS               |
+| !NES                                                                           | NES                |
+| !NOTS                                                                          | NOTS               |
+| !NUMS                                                                          | NUMS               |
+| !OCONVS                                                                        | OCONVS             |
+| !ORS                                                                           | ORS                |
+| !SEQS                                                                          | SEQS               |
+| !SPACES                                                                        | SPACES             |
+| !SPLICE                                                                        | SPLICE             |
+| !STRS                                                                          | STRS               |
+| !SUBS                                                                          | SUBS               |
+| !SUBSTRINGS                                                                    | SUBSTRINGS         |
+| !SUMMATION                                                                     | SUMMATION          |
