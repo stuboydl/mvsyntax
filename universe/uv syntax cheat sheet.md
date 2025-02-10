@@ -1,10 +1,10 @@
 # Rocket UniVerse (U2) mvbasic cheat sheet
 
-Scraped from the UV Basic Commands Ref v11.4.1 Aug 2023 [UNV-1141-BASR-1]
-
 Simple syntax listing. See documentation for more info
+Scraped from the UV Basic documentation v11.4.1 Aug 2023 [UNV-1141-BASR-1]
+Keywords are case insensitive eg `ACTIVATEKEY` ≈ `ActivateKey` ≈ `activatekey`
 
-Keywords are case insensitive eg ACTIVATEKEY = ActivateKey = activatekey
+
 
 ## Operators
 
@@ -240,7 +240,7 @@ EXECUTE commands [,IN < expression] [,OUT > variable] [,SELECT[(list)]< dynamic.
 EXECUTE commands [ ,//IN. < expression] [,//OUT. > variable] [,//SELECT.[(list)] < dynamic.array] [,//SELECT.[(list)] > variable] [,//PASSLIST.[(dynamic.array)]] [,//STATUS. > variable]
 EXIT
 EXP(expression)
-EXTRACT(dynamic.array, field#[,value# [,subvalue#]] ) 
+EXTRACT(dynamic.array, field#[,value# [,subvalue#]] )
 FADD(number1, number2)
 FDIV(number1, number2)
 FFIX(number)
@@ -426,10 +426,10 @@ PySetAttr(pyobject, attrName, value)
 QUOTE(expression)
 RAISE(expression)
 RANDOMIZE [(expression)]
-READ  dynamic.array  FROM [file.variable,] record.ID [ON ERROR  statements] { THEN  statements [ELSE  statements] | ELSE  statements } 
-READ{L|U} dynamic.array FROM [file.variable ,] record.ID [ON ERROR  statements] [LOCKED  statements] { THEN  statements [ELSE  statements] | ELSE  statements } 
-READV dynamic.array FROM [file.variable ,] record.ID ,  field# [ON ERROR  statements] { THEN  statements [ELSE  statements] | ELSE  statements } 
-READV{L|U} dynamic.array  FROM [file.variable ,] record.ID , field# [ON ERROR  statements] [LOCKED  statements] { THEN  statements [ELSE  statements] | ELSE  statements } 
+READ  dynamic.array  FROM [file.variable,] record.ID [ON ERROR  statements] { THEN  statements [ELSE  statements] | ELSE  statements }
+READ{L|U} dynamic.array FROM [file.variable ,] record.ID [ON ERROR  statements] [LOCKED  statements] { THEN  statements [ELSE  statements] | ELSE  statements }
+READV dynamic.array FROM [file.variable ,] record.ID ,  field# [ON ERROR  statements] { THEN  statements [ELSE  statements] | ELSE  statements }
+READV{L|U} dynamic.array  FROM [file.variable ,] record.ID , field# [ON ERROR  statements] [LOCKED  statements] { THEN  statements [ELSE  statements] | ELSE  statements }
 READBLK variable FROM file.variable, blocksize { THEN statements [ELSE statements] | ELSE statements }
 READLIST dynamic.array [FROM list.number] { THEN statements [ELSE statements] | ELSE statements }
 READNEXT dynamic.array [,value [,subvalue]] [FROM list] {THEN statements [ELSE statements] | ELSE statements}
@@ -683,6 +683,7 @@ XTD(string)
 
 ## @Variables
 
+~~~ mvbasic
 @ABORT.CODE
 @ACCOUNT
 @AM
@@ -782,17 +783,29 @@ XTD(string)
 @WHO
 @YEAR
 @YEAR4
+~~~
 
 ## Special SYSTEM() functions
 
-[_int_ = integer, _char_ = ascii character, _bool_=@TRUE/@FALSE]
+(_int_ = integer, _bool_= Boolean)
 
-- **SYSTEM(1030)** returns _@AM_ delimited version of _@SENTENCE_ [per char(20)/space]
+- **SYSTEM(1030)** returns _@AM_ delimited version of _@SENTENCE_ [per space, "except quotes"]
+  - eg _>PROG\_ARG1\_"ARG\_2"\_ \_ARG4_ -> `PROG`@AM`ARG1`@AM`ARG 2`@AM@AM`ARG4`
 
 - **SYSTEM(9001)** returns call stack. Name of current prog: SYSTEM(9001)<1,2>, parent prog: SYSTEM(9001)<2,2>, etc
 
 - **ASSIGN _int_ TO SYSTEM(1)** sets print channel _int_ active. [default] _int_ = -1
 
+  _Use the following in conjunction with SYSTEM(1), active printer channel_
+
+  - ASSIGN _bool_ TO SYSTEM(1005) turn on/off pagination [true=on/false=off]
+  - ASSIGN _int_ TO SYSTEM(1008) changes active printer channel width to _int_
+  - ASSIGN _int_ TO SYSTEM(1009) changes active printer channel depth to _int_
+  - ASSIGN _int_ TO SYSTEM(1010) changes active printer channel top margin to _int_
+  - ASSIGN _int_ TO SYSTEM(1011) changes active printer channel bottom margin to _int_
+
+  Example
+  
   ~~~ mvbasic
   ASSIGN 5 TO SYSTEM(1)    ;* set to print channel 5
   PRINT "This goes to print channel 5 as if 'PRINT ON 5'"
@@ -802,15 +815,6 @@ XTD(string)
   PRINT "Back on user's terminal"
   ~~~
 
-  _Use the following in conjunction with SYSTEM(1), active printer channel_
-
-  - ASSIGN _@TRUE_ TO SYSTEM(1005)  turn on pagination
-  - ASSIGN _@FALSE_ TO SYSTEM(1005) turn off pagination
-  - ASSIGN _int_ TO SYSTEM(1008) changes active printer channel width to _int_
-  - ASSIGN _int_ TO SYSTEM(1009) changes active printer channel depth to _int_
-  - ASSIGN _int_ TO SYSTEM(1010) changes active printer channel top margin to _int_
-  - ASSIGN _int_ TO SYSTEM(1011) changes active printer channel bottom margin to _int_
-
 - **ASSIGN _int_ TO SYSTEM(225)** changes active USERNO to _int_
 
 - **ASSIGN _bool_ TO SYSTEM(1017)** changes how Type19 records are read/written.
@@ -819,22 +823,18 @@ XTD(string)
 
 - **ASSIGN _int_ TO SYSTEM(2101)** LIST.READU display
 
-- **ASSIGN _bool_ TO SYSTEM(4001)**
+- **ASSIGN _bool_ TO SYSTEM(4001)** enable/disable custom uvshell prompt
   - ASSIGN _@TRUE_ TO SYSTEM(4001) enable custom uvshell prompt defined in SYSTEM(4002)
   - ASSIGN _@FALSE_ TO SYSTEM(4001) disable custom uvshell prompt. Resumes default uvshell prompt (>)
+- **ASSIGN _dynamic.array_ TO SYSTEM(4002)** define custom uvshell prompt. Dynamic.array contains:
 
-  - ASSIGN _dynamic.array_ TO SYSTEM(4002) define custom uvshell prompt.
-    <1> custom uvshell prompt _string_
-    <2> custom select-list-active prompt _string_
-    <3> custom command-continuation prompt _string_
+   > <1> custom uvshell prompt string - eg `DEV#>`
+   > <2> custom select-list-active prompt string - eg `DEV>>`
+   > <3> custom command-continuation prompt string - eg `DEV?>`
 
 ## other SYSTEM() functions TBC
 
-  44  returns the # of processes (not seats in use)
-  51  device license info for SB+
-  62  value of uvconfig tunable MODFPTRS
-  63  value of uvconfig tunable BLKMAX
-  64  value of uvconfig tunable MAXKEYSIZE
+~~~ mvbasic
 ASSIGN 1 TO SYSTEM(999)" which disables "Q" at the "Press... " prompt
 1002  indicates if file is in rotating file pool
 1003  indicates if print job is in process
@@ -842,7 +842,6 @@ ASSIGN 1 TO SYSTEM(999)" which disables "Q" at the "Press... " prompt
 1006  indicates if cursor is at left margin
 1012  page header (set with HEADING)
 1017  "ASSIGN 1 to SYSTEM(1017)" In UniData the equivalent command for no conversion is "NOCONVERT [ON | OFF]". Use to read/write binary files in directories.
-1022  flag for use with NLS opens
 1030  parse @sentence retaining quoted literals (returns @fm delimited string), i.e THIS IS "MY TEST" on command line will be returned as THIS @fm IS @fm MY TEST ( 3 instead of 4 arguments)
 1050  TRAP key array (set with KEYTRAP and documented in KEYEDIT)
 1301  effective user name
@@ -853,32 +852,33 @@ ASSIGN TO SYSTEM(3001) through SYSTEM(3005) to fire counters for the Windows NT 
 9001  returns name of current subroutine -- actually name of current object path in SYSTEM(9001)<1,2>.
       The dynamic array returned contains the whole stack of object paths. Aborts if called by UO.NET.
 9010  Returns database type UD, UV, UD.PE or UV.PE (udt 7.1.5 or later)
+~~~
 
 ## BASIC subroutines TBC
 
 |Subroutine                                                                      |Equivalent Function |
-|-                                                                               |-                   |
+|--------------------------------------------------------------------------------|-                   |
 | !ASYNC(key, line, data, count, carrier) ;*(!AMLC)                              |                    |
 | !EDIT.INPUT(keys, wcol, wrow, wwidth, buffer, startpos, bwidth, ftable, code)  |                    |
 | !ERRNO(variable)                                                               |                    |
 | !FCMP(result, number1, number2)                                                |                    |
 | !GET.KEY(string, code)                                                         |                    |
-| !GET.PARTNUM subroutine                                                        |                    |
-| !GET.PATHNAME subroutine                                                       |                    |
-| !GET.USER.COUNTS subroutine                                                    |                    |
-| !GETPU subroutine                                                              |                    |
-| !INLINE.PROMPTS subroutine                                                     |                    |
-| !INTS subroutine                                                               |                    |
-| !MAKE.PATHNAME subroutine                                                      |                    |
-| !MATCHES subroutine                                                            |                    |
-| !MESSAGE subroutine                                                            |                    |
-| !PACK.FNKEYS subroutine                                                        |                    |
-| !REPORT.ERROR subroutine                                                       |                    |
-| !SET.PTR subroutine                                                            |                    |
-| !SETPU subroutine                                                              |                    |
-| !TIMDAT subroutine                                                             |                    |
-| !USER.TYPE subroutine                                                          |                    |
-| !VOC.PATHNAME subroutin                                                        |                    |
+| !GET.PARTNUM                                                         |                    |
+| !GET.PATHNAME                                                        |                    |
+| !GET.USER.COUNTS                                                     |                    |
+| !GETPU                                                               |                    |
+| !INLINE.PROMPTS                                                      |                    |
+| !INTS                                                                |                    |
+| !MAKE.PATHNAME                                                       |                    |
+| !MATCHES                                                             |                    |
+| !MESSAGE                                                             |                    |
+| !PACK.FNKEYS                                                         |                    |
+| !REPORT.ERROR                                                        |                    |
+| !SET.PTR                                                             |                    |
+| !SETPU                                                               |                    |
+| !TIMDAT                                                              |                    |
+| !USER.TYPE                                                           |                    |
+| !VOC.PATHNAME                                                        |                    |
 | !ADDS                                                                          | ADDS               |
 | !ANDS                                                                          | ANDS               |
 | !CATS                                                                          | CATS               |
@@ -919,3 +919,6 @@ ASSIGN TO SYSTEM(3001) through SYSTEM(3005) to fire counters for the Windows NT 
 | !SUBS                                                                          | SUBS               |
 | !SUBSTRINGS                                                                    | SUBSTRINGS         |
 | !SUMMATION                                                                     | SUMMATION          |
+
+---
+The end
