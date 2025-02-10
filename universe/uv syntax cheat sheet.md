@@ -633,3 +633,177 @@ XMLExecute(cmd, options, xmlvar, xsdvar)
 XMLTODB(xml_document, doc_flag, u2xmapping_rules, u2xmap_ flag, status)
 XTD(string)
 ~~~
+
+## @Variables
+
+@ABORT.CODE
+@ACCOUNT
+@AM
+@ANSLast
+@AUTHORIZATION
+@COMMAND
+@COMMAND.STACK
+@CONV
+@CRTHIGH
+@CRTWIDE
+@DATA.PENDING
+@DATE
+@DAY
+@DICT
+@FALSE
+@FILE.NAME
+@FILENAME
+@FILENAME
+@FILENAME
+@FM
+@FORMAT
+@HDBC
+@HEADER
+@HENV
+@HSTMT
+@ID
+@IDX.FILEPATH
+@IDX.IOTYPE
+@IM
+@ISOLATION
+@LEVEL
+@LOGNAME
+@LPTRHIGH
+@LPTRWIDE
+@MONTH
+@MV
+@NB
+@NB
+@ND
+@NI
+@NS
+@NULL
+@NULL.STR
+@NV
+@OPTION
+@PARASENTENCE
+@PATH
+@PYEXCEPTIONMSGA
+@PYEXCEPTIONTRACEBACKA
+@PYEXCEPTIONTYPEA
+@RECCOUNT
+@RECORD
+@RECUR0
+@RECUR1
+@RECUR2
+@RECUR3
+@RECUR4
+@SCHEMA
+@SELECTED
+@SENTENCE
+@SM
+@SQL.CODE
+@SQL.DATE
+@SQL.ERROR
+@SQL.STATE
+@SQL.TIME
+@SQL.WARNING
+@SQLPROC.NAME
+@SQLPROC.TX.LEVEL
+@STDFIL
+@SVM
+@SYS.BELL
+@SYSTEM.RETURN.CODE
+@SYSTEM.SET.
+@SYSTEM.SET
+@SYSTEM.RETURN.CODE.
+@TERM.TYPE
+@TIME
+@TM
+@TRANSACTION
+@TRANSACTION.ID
+@TRANSACTION.LEVEL
+@TRUE
+@TTY
+@TZSince
+@TZ
+@U2PYA
+@USER0
+@USER1
+@USER2
+@USER3
+@USER4
+@USERNO
+@USER.NO
+@USER.RETURN.CODE
+@VM
+@WHO
+@YEAR
+@YEAR4
+
+## Special SYSTEM() functions
+
+[_int_ = integer, _char_ = ascii character, _bool_=@TRUE/@FALSE]
+
+- **SYSTEM(1030)** returns _@AM_ delimited version of _@SENTENCE_ [per char(20)/space]
+
+- **SYSTEM(9001)** returns call stack. Name of current prog: SYSTEM(9001)<1,2>, parent prog: SYSTEM(9001)<2,2>, etc
+
+- **ASSIGN _int_ TO SYSTEM(1)** sets print channel _int_ active. [default] _int_ = -1
+
+  ~~~ mvbasic
+  ASSIGN 5 TO SYSTEM(1)    ;* set to print channel 5
+  PRINT "This goes to print channel 5 as if 'PRINT ON 5'"
+  ASSIGN 64 TO SYSTEM(1009)
+  PRINT "Change the (page) depth to 64 lines on PC 5"
+  ASSIGN -1 TO SYSTEM(1)   ;* set PC back to user's terminal
+  PRINT "Back on user's terminal"
+  ~~~
+
+  _Use the following in conjunction with SYSTEM(1), active printer channel_
+
+  - ASSIGN _@TRUE_ TO SYSTEM(1005)  turn on pagination
+  - ASSIGN _@FALSE_ TO SYSTEM(1005) turn off pagination
+  - ASSIGN _int_ TO SYSTEM(1008) changes active printer channel width to _int_
+  - ASSIGN _int_ TO SYSTEM(1009) changes active printer channel depth to _int_
+  - ASSIGN _int_ TO SYSTEM(1010) changes active printer channel top margin to _int_
+  - ASSIGN _int_ TO SYSTEM(1011) changes active printer channel bottom margin to _int_
+
+
+- **ASSIGN _int_ TO SYSTEM(225)** changes active USERNO to _int_
+
+- **ASSIGN _bool_ TO SYSTEM(1017)** changes how Type19 records are read/written.
+  - ASSIGN _@TRUE_ TO SYSTEM(1017) will result in no conversion, so reads and writes will retain NL or @AM chars
+  - ASSIGN _@FALSE_ TO SYSTEM(1017) [default] will result in all NL (newline) chars converted to _@AM_ chars on reads, and _@AM_ chars to NL chars on writes
+
+- **ASSIGN _int_ TO SYSTEM(2101)** LIST.READU display
+
+- **ASSIGN _bool_ TO SYSTEM(4001)**
+  - ASSIGN _@TRUE_ TO SYSTEM(4001) enable custom uvshell prompt defined in SYSTEM(4002)
+  - ASSIGN _@FALSE_ TO SYSTEM(4001) disable custom uvshell prompt. Resumes default uvshell prompt (>)
+
+  - ASSIGN _dynamic.array_ TO SYSTEM(4002) define custom uvshell prompt.
+    <1> custom uvshell prompt _string_
+    <2> custom select-list-active prompt _string_
+    <3> custom command-continuation prompt _string_
+
+### SYSTEM() functions TBC
+
+  44  returns the # of processes (not seats in use)
+  51  device license info for SB+
+  62  value of uvconfig tunable MODFPTRS
+  63  value of uvconfig tunable BLKMAX
+  64  value of uvconfig tunable MAXKEYSIZE
+ASSIGN 1 TO SYSTEM(999)" which disables "Q" at the "Press... " prompt
+1002  indicates if file is in rotating file pool
+1003  indicates if print job is in process
+1005  0 if pagination is disabled, 1 if enabled. Can ASSIGN to system(1005).
+1006  indicates if cursor is at left margin
+1012  page header (set with HEADING)
+1017  "ASSIGN 1 to SYSTEM(1017)" In UniData the equivalent command for no conversion is "NOCONVERT [ON | OFF]". Use to read/write binary files in directories.
+1022  flag for use with NLS opens
+1030  parse @sentence retaining quoted literals (returns @fm delimited string), i.e THIS IS "MY TEST" on command line will be returned as THIS @fm IS @fm MY TEST ( 3 instead of 4 arguments)
+1050  TRAP key array (set with KEYTRAP and documented in KEYEDIT)
+1301  effective user name
+1302 LISTU data, one attribute per user (not confirmed)
+ASSIGN TO SYSTEM(3001) through SYSTEM(3005) to fire counters for the Windows NT performance monuitor.
+4001  0 for normal command line prompt (">"). Set to 1 to change the command line prompt to the value of System(4002).
+4002  the replacement command line prompt, e.g., ":" instead of ">". Can be multiple chars, e.g., "DEV>". This is actually a dynamic array: <1> is the replacement string for the normal prompt; <2> for the select-list-active prompt; <3> the command continuation prompt.
+9001  returns name of current subroutine -- actually name of current object path in SYSTEM(9001)<1,2>.
+      The dynamic array returned contains the whole stack of object paths. Aborts if called by UO.NET.
+9010  Returns database type UD, UV, UD.PE or UV.PE (udt 7.1.5 or later)
