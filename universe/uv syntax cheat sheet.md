@@ -1,76 +1,63 @@
 # Rocket UniVerse (U2) mvbasic cheat sheet
 
-Simple syntax listing. See documentation for more info
+Simple syntax listing. See Rocket's online documentation for more info
 Scraped from the UV Basic documentation v11.4.1 Aug 2023 [UNV-1141-BASR-1]
 Keywords are case insensitive eg `ACTIVATEKEY` ≈ `ActivateKey` ≈ `activatekey`
-
-
+Comments may appear at end of line _`;* comment`_
 
 ## Operators
 
 ### Arithmetic Operators
 
-~~~ mvbasic
-expression + expression
-expression - expression
-expression * expression
-expression / expression
-expression ^ expression  ;* (**)
-~~~
+<!-- ~~~ mvbasic -->
+> expression **+** expression
+expression **-** expression
+expression **\*** expression
+expression **/** expression
+expression **^** expression  _;* (**)_
 
-### Assignment Operators
+### Compound Assignment Operators
 
-~~~ mvbasic
-variable = expression
-variable += expression
-variable -= expression
-variable := expression
-~~~
+> variable **=** expression
+variable **+=** expression _;* var = var + exp_
+variable **-=** expression _;* var = var - exp_
+variable **:=** expression _;* var = var : exp_
 
 ### Logical Operators
 
-~~~ mvbasic
-expression AND expression ;* (&)
-expression OR expression  ;* (!)
-NOT(expression)
-~~~
+> expression **AND** expression _;* (&)_
+expression **OR** expression  _;* (!)_
+**NOT**(expression)
 
 ### Pattern Matching Operators
 
-~~~ mvbasic
-expression MATCH pattern  ;* MATCHES
-~~~
+> expression **MATCH** pattern  _;* MATCHES_
 
 ### Relational Operators
 
-~~~ mvbasic
-expression = expression  ;* (EQ)
-expression # expression  ;* (NE,<>,><)
-expression < expression  ;* (LT)
-expression > expression  ;* (GT)
-expression <= expression ;* (LE,=<,#>)
-expression >= expression ;* (GE,=>,#<)
-~~~
+> expression **=** expression  _;* (EQ)_
+expression **#** expression  _;* (NE,<>,><)_
+expression **<** expression  _;* (LT)_
+expression **>** expression  _;* (GT)_
+expression **<=** expression _;* (LE,=<,#>)_
+expression **>=** expression _;* (GE,=>,#<)_
 
 ### String Operators
 
-~~~ mvbasic
-expression : expression
-expression[ [start,] length]
-expression[ delimiter, occurrence, fields] ;* FIELD(delimiter, occurrence, fields)
-~~~
+> expression **:** expression
+expression **[** [ start,] [-]length **]**
+expression **[** delimiter, occurrence, fields **]** _;* FIELD(delimiter, occurrence, fields)_
 
-### Dynamic Array Logical and Relational Operators
+#### Equivalent Dynamic Array Logical and Relational Functions
 
-~~~ mvbasic
-ADDS(exp1, exp2)
+> ADDS(exp1, exp2)
 ANDS(exp1, exp2)
 CATS(exp1, exp2)
 DIVS(exp1, exp2)
 EQS(exp1, exp2)
 GES(exp1, exp2)
 GTS(exp1, exp2)
-IFS(exp1, exp2, m3)
+IFS(exp1, exp2, exp3)
 LES(exp1, exp2)
 LTS(exp1, exp2)
 MULS(exp1, exp1)
@@ -78,28 +65,27 @@ NES(exp1, exp2)
 NOTS(exp1)
 ORS(exp1, exp2)
 SUBS(exp1, exp2)
-~~~
 
 ## Statements and Functions
 
 ~~~ mvbasic
-! [comment.text]
-#INCLUDE [filename] program
+! [comment.text]                    ;* "*", REM, $*
+#INCLUDE [filename] program         ;* INCLUDE, $INCLUDE
 #INCLUDE program FROM filename
-$* [comment.text]
+$* [comment.text]                   ;* "*", "!", REM
 $CHAIN [filename] program
 $COPYRIGHT "copyright.notice"
 $DEFINE identifier [replacement.text]
 $EJECT
 $IFDEF identifier [statements] [[$ELSE] [statements]] $ENDIF
 $IFNDEF identifier [statements] [[$ELSE] [statements]] $ENDIF
-$INCLUDE [filename] program
+$INCLUDE [filename] program         ;* INCLUDE, #INCLUDE
 $INCLUDE program FROM filename
 $INSERT primos.pathname
 $MAP mapname
-$OPTIONS [flavor] [options] ;*(PICK,INFORMATION,REALITY,IN2,DEFAULT,PIOPEN)
+$OPTIONS [flavor] [options]         ;*(PICK,INFORMATION,REALITY,IN2,DEFAULT,PIOPEN)
 $UNDEFINE identifier
-* [comment.text]
+* [comment.text]                    ;* "!", REM, "$*"
 dynamic.array< field# [ ,value# [,subvalue#]] >
 @(column [,row])
 @(–code [,arg ])
@@ -235,6 +221,7 @@ EQUATE symbol LIT[ERALLY] string [,symbol LIT string …]
 EREPLACE(expression, substring, replacement [,occurrence [,begin]] )
 ERRMSG message.ID [,message.ID …]
 EXCHANGE(string, xx, yy)
+EXEC commands [CAPTURING variable] [PASSLIST [dynamic.array]] [RTNLIST [variable]] [{SETTING | RETURNING} variable]
 EXECUTE commands [CAPTURING variable] [PASSLIST [dynamic.array]] [RTNLIST [variable]] [{SETTING | RETURNING} variable]
 EXECUTE commands [,IN < expression] [,OUT > variable] [,SELECT[(list)]< dynamic.array] [,SELECT[(list)] > variable],PASSLIST [(dynamic.array)]] [,STATUS  > variable]
 EXECUTE commands [ ,//IN. < expression] [,//OUT. > variable] [,//SELECT.[(list)] < dynamic.array] [,//SELECT.[(list)] > variable] [,//PASSLIST.[(dynamic.array)]] [,//STATUS. > variable]
@@ -267,8 +254,8 @@ FOR variable = start TO end [STEP increment] [loop.statements] [CONTINUE | EXIT]
 FORMLIST [variable] [TO list.number] [ON ERROR statements]
 FSUB(number1, number2)
 FUNCTION [name] [( [MAT] variable [, [MAT] variable …] )]
-GARBAGECOLLECT ?
-GCI ?
+GARBAGECOLLECT ;*? reserved word - not verb
+GCI ;*? reserved word - not verb
 GCDISTANCE(lat1,lon1,lat2,lon2)
 generateKey(privKey, pubKey, format, keyLoc, algorithm, keyLength, passPhrase, paramFile)
 generateKey(privKey, pubKey, format, keyLoc, algorithm, keyLength, passPhrase, paramFile)
@@ -298,7 +285,7 @@ GTS(dynamic.array1, dynamic.array2)
 HEADING [ON print.channel] heading
 HEADINGE [ON print.channel] heading
 HEADINGN [ON print.channel] heading
-hmac= HMAC(hmacAlg, hmacKey, hmacData, [outFormat])
+HMAC(hmacAlg, hmacKey, hmacData, [outFormat])
 HUSH { ON | OFF | expression} [SETTING status ]
 ICHECK(dynamic.array [, file.variable] , key [, column#] )
 ICONV(string, conversion)
@@ -557,6 +544,7 @@ STR(string, repeat)
 STRS(dynamic.array, repeat)
 submitRequest(request_handle, time_out, post_data,response_headers,response_data, http_status)
 SUBR(name, [argument [,argument …]] )
+SUB [name] [([MAT] variable [, [MAT] variable …] )]
 SUBROUTINE [name] [([MAT] variable [, [MAT] variable …] )]
 SUBS(dynamic.array1, dynamic.array2)
 SUBSTRINGS(dynamic.array, start, length)
@@ -681,116 +669,114 @@ XMLTODB(xml_document, doc_flag, u2xmapping_rules, u2xmap_ flag, status)
 XTD(string)
 ~~~
 
-## @Variables
+## @Macros
 
-~~~ mvbasic
-@ABORT.CODE
-@ACCOUNT
-@AM
-@ANSLast
-@AUTHORIZATION
-@COMMAND
-@COMMAND.STACK
-@CONV
-@CRTHIGH
-@CRTWIDE
-@DATA.PENDING
-@DATE
-@DAY
-@DICT
-@FALSE
-@FILE.NAME
-@FILENAME
-@FILENAME
-@FILENAME
-@FM
-@FORMAT
-@HDBC
-@HEADER
-@HENV
-@HSTMT
-@ID
-@IDX.FILEPATH
-@IDX.IOTYPE
-@IM
-@ISOLATION
-@LEVEL
-@LOGNAME
-@LPTRHIGH
-@LPTRWIDE
-@MONTH
-@MV
-@NB
-@NB
-@ND
-@NI
-@NS
-@NULL
-@NULL.STR
-@NV
-@OPTION
-@PARASENTENCE
-@PATH
-@PYEXCEPTIONMSGA
-@PYEXCEPTIONTRACEBACKA
-@PYEXCEPTIONTYPEA
-@RECCOUNT
-@RECORD
-@RECUR0
-@RECUR1
-@RECUR2
-@RECUR3
-@RECUR4
-@SCHEMA
-@SELECTED
-@SENTENCE
-@SM
-@SQL.CODE
-@SQL.DATE
-@SQL.ERROR
-@SQL.STATE
-@SQL.TIME
-@SQL.WARNING
-@SQLPROC.NAME
-@SQLPROC.TX.LEVEL
-@STDFIL
-@SVM
-@SYS.BELL
-@SYSTEM.RETURN.CODE
-@SYSTEM.SET.
-@SYSTEM.SET
-@SYSTEM.RETURN.CODE.
-@TERM.TYPE
-@TIME
-@TM
-@TRANSACTION
-@TRANSACTION.ID
-@TRANSACTION.LEVEL
-@TRUE
-@TTY
-@TZSince
-@TZ
-@U2PYA
-@USER0
-@USER1
-@USER2
-@USER3
-@USER4
-@USERNO
-@USER.NO
-@USER.RETURN.CODE
-@VM
-@WHO
-@YEAR
-@YEAR4
-~~~
+Sometimes called "@Variables".
+nb The Read-Only (RO) indicator below is not always correct [taken from UNV-1141-BASR-1].
+
+| Macro | _RO_ | Description |
+|-|-|-|
+| @ABORT.CODE | * | A numeric value indicating the type of condition that caused the ON.ABORT paragraph to execute. The values are:<br>1 – An ABORT statement was executed.<br>2 – An abort was requested after pressing the Break key followed by option A.<br>3 – An internal or fatal error occurred.<br>4 – An AUTO.LOGOUT event occurred.
+| @ACCOUNT | * | User login name. Same as @LOGNAME. Nonstacked. |
+| @AM | * | Field mark: CHAR(254). Same as @FM. |
+| @ANS |   | Last I-type answer, value indeterminate. |
+| @AUTHORIZATION | * | Current effective user name. |
+| @COMMAND | * | Last command executed or entered at the UniVerse prompt. |
+| @COMMAND.STACK | * | Dynamic array containing the last 99 commands executed. |
+| @CONV |   | For future use. |
+| @CRTHIGH | * | Number of lines on the terminal. |
+| @CRTWIDE | * | Number of columns on the terminal. |
+| @DATA.PENDING | * | Dynamic array containing input generated by the DATA statement. Values in the dynamic array are separated by field marks. |
+| @DATE | * | Internal date when the program was invoked. |
+| @DAY | * | Day of month from @DATE. |
+| @DICT |   | For future use. |
+| @FALSE | * | Compiler replaces the value with 0. |
+| @FILE.NAME | | Current file name. When used in a virtual field index, @FILENAME reflects the current file name being used in a RetrieVe or UniVerse SQL statement. Same as @FILENAME. Note:  The @FILENAME variable is also populated during a BUILD.INDEX command using the CONCURRENT option so that I-type indexes using @FILENAME will be built correctly. |
+| @FILENAME |   | Same as @FILE.NAME. |
+| @FM | * | Field mark: CHAR(254). Same as @AM. |
+| @FORMAT |   | For future use. |
+| @HDBC | * | ODBC connection environment on the local UniVerse server. Nonstacked. |
+| @HEADER |   | For future use. |
+| @HENV | * | ODBC environment on the local UniVerse server. Nonstacked. |
+| @HSTMT | * | ODBC statement environment on the local UniVerse server. Nonstacked. |
+| @ID |   | Current record ID. |
+| @IDX.FILEPATH |   | Can be used within an indexed subroutine. Contains the full path of the UniVerse file being updated that caused the indexed subroutine to fire. |
+| @IDX.IOTYPE |   | Specifies the type of operation being performed. Can be integrated in the indexed subroutine to determine they type of database operation that caused the indexed subroutine to fire. The following values are associated with the @IDX.IOTYPE:<br>0 - The value returned when @IDX.IOTYPE is used outside the context of an indexed subroutine.<br>1 - The value returned when the SUBR is called because an INSERT operation is performed.<br>2 - The value returned when the SUBR is called because a DELETE operation is performed.<br>3 - The value returned when the SUBR is called because an UPDATE operation is used to evaluate the original value operation.<br>4 - The value returned when a SUBR i called because an UPDATE operation is used to evaluate the new value operation. |
+| @IM | * | Item mark: CHAR(255). |
+| @ISOLATION | * | Current transaction isolation level for the active transaction or the current default isolation level if no transaction exists. |
+| @LEVEL | * | Nesting level of execution statements. Nonstacked. |
+| @LOGNAME | * | User login name. Same as @ACCOUNT. |
+| @LPTRHIGH | * | Number of lines on the device to which you are printing (that is, terminal or printer). |
+| @LPTRWIDE | * | Number of columns on the device to which you are printing (that is, terminal or printer). |
+| @MONTH | * | Current month. |
+| @MV |   | Current value counter for columnar listing only. Used only in I- descriptors. Same as @NV. |
+| @NB |   | Current BREAK level number. 1 is the lowest-level break. |
+| @NB |   | has a value of 255 on the grand total line. Used only in I- descriptors. |
+| @ND |   | Number of detail lines since the last BREAK on a break line. Used only in I-descriptors. |
+| @NI |   | Current item counter (the number of items listed or selected). Used only in I-descriptors. Same as @RECCOUNT. |
+| @NS |   | Current subvalue counter for columnar listing only. Used only in I-descriptors. |
+| @NULL | * | The null value. Nonstacked. |
+| @NULL.STR | * | Internal representation of the null value, which is CHAR(128). Nonstacked. |
+| @NV |   | Current value counter for columnar listing only. Used only in I- descriptors. Same as @MV. |
+| @OPTION |   | Value of field 5 in the VOC for the calling verb. |
+| @PARASENTENCE | * | Last sentence or paragraph that invoked the current process. |
+| @PATH | * | Path name of the current account. |
+| @PYEXCEPTIONMSG |   | A string that stores the detailed exception message. If no exception is thrown, its value is an empty string. |
+| @PYEXCEPTIONTRACEBACK |   | A string that stores the traceback of the exception. If no exception is thrown, its value is an empty string. |
+| @PYEXCEPTIONTYPE |   | A string that stores the exception type. If no exception is thrown, its value is an empty string. |
+| @RECCOUNT |   | Current item counter (the number of items listed or selected). Used only in I-descriptors. Same as @NI. |
+| @RECORD |   | Entire current record. |
+| @RECUR0 |   | Reserved. |
+| @RECUR1 |   | Reserved. |
+| @RECUR2 |   | Reserved. |
+| @RECUR3 |   | Reserved. |
+| @RECUR4 |   | Reserved. |
+| @SCHEMA | * | Schema name of the current UniVerse account. Nonstacked. When users create a new schema, @SCHEMA is not set until the next time they log in to UniVerse. |
+| @SELECTED |   | Number of elements selected from the last select list. Nonstacked. |
+| @SENTENCE | * | Sentence that invoked the current BASIC program. Any EXECUTE statement updates @SENTENCE. |
+| @SM | * | Subvalue mark: CHAR(252). Same as @SVM. |
+| @SQL.CODE | * | For future use. |
+| @SQL.DATE | * | Current system date. Use in trigger programs. Nonstacked. |
+| @SQL.ERROR | * | For future use. |
+| @SQL.STATE | * | For future use.@Variables 571 VariableRead- only Value |
+| @SQL.TIME | * | Current system time. Use in trigger programs. Nonstacked. |
+| @SQL.WARNING | * | For future use. |
+| @SQLPROC.NAME | * | Name of the current SQL procedure. |
+| @SQLPROC.TX.LEVEL | * | Transaction level at which the current SQL procedure began. |
+| @STDFIL |   | Default file variable. |
+| @SVM | * | Subvalue mark: CHAR(252). Same as @SM. |
+| @SYS.BELL | * | Bell character. Nonstacked. |
+| @SYSTEM.RETURN.CODE |   | Status codes returned by system processes. Same as @SYSTEM.SET. |
+| @SYSTEM.SET |   | Status codes returned by system processes. Same as @SYSTEM.RETURN.CODE. |
+| @TERM.TYPE | * | Terminal type. Nonstacked. |
+| @TIME |   | Internal time when the program was invoked. |
+| @TM | * | Text mark: CHAR(251). |
+| @TRANSACTION | * | A numeric value. Any nonzero value indicates that a transaction is active; the value 0 indicates that no transaction exists. |
+| @TRANSACTION.ID | * | Transaction number of the active transaction. An empty string indicates that no transaction exists. |
+| @TRANSACTION.LEVEL | * | Transaction nesting level of the active transaction. A 0 indicates that no transaction exists. |
+| @TRUE | * | Compiler replaces the value with 1. |
+| @TTY |   | Terminal device name. If the process is a phantom, @TTY returns the value ‘phantom’. If the process is a UniVerse API, it returns ‘uvcs’. Note: In PI/Open flavor, @TTY returns an empty string for PHANTOM processes. |
+| @TZ |   | Since datetime is stored as UTC, in order to consider the timezone of the current user when converting to and from the locale date and time, a new @-variable called @TZ has been introduced. @TZ is a per-process variable which defaults to an empty string. If @TZ is empty, the timezone in use will refer to the user’s TZ environment variable (if set) or to the system’s timezone setting if it is not set. The @TZ value can be set to any time zone supported by the underlying operating system. For Unix and Linux, it can be names supported by the tz database. When converting datetime from and to the local date and time, @TZ will be used as the local time zone. The exception is when during ICONV() and OCONV() for datetime, if a timezone is specified in the conversion code or the data to be converted, the @TZ’s value will be overridden.<br>_Note_:  This variable is supported on Linux and Solaris platforms only. |
+| @U2PY |   | A string that returns the number of the Python level at whichthe current BASIC program is running. Without Python, @U2PY has the value of 0. With Python, @U2PY has the value of a positive integer. Note:  SYSTEM(55) has been implemented to return the samevalue as @U2PY. |
+| @USER0 |   | User-defined. |
+| @USER1 |   | User-defined. |
+| @USER2 |   | User-defined. |
+| @USER3 |   | User-defined. |
+| @USER4 |   | User-defined. |
+| @USERNO | * | User number. Nonstacked. Same as @USER.NO. |
+| @USER.NO | * | Same as @USERNO. |
+| @USER.RETURN.CODE |   | Status codes created by the user. |
+| @VM | * | Value mark: CHAR(253). |
+| @WHO | * | Name of the current UniVerse account directory. Nonstacked. |
+| @YEAR |   | Current year (2 digits). |
+| @YEAR4 |   | Current year (4 digits). |
 
 ## Special SYSTEM() functions
 
 (_int_ = integer, _bool_= Boolean)
 
 - **SYSTEM(1030)** returns _@AM_ delimited version of _@SENTENCE_ [per space, "except quotes"]
-  - eg _>PROG\_ARG1\_"ARG\_2"\_ \_ARG4_ -> `PROG`@AM`ARG1`@AM`ARG 2`@AM@AM`ARG4`
+  - eg _>PROG\_ARG1\_"ARG\_2"\_ \_ARG4_ -> PROG`@AM`ARG1`@AM`ARG 2`@AM` `@AM`ARG4
 
 - **SYSTEM(9001)** returns call stack. Name of current prog: SYSTEM(9001)<1,2>, parent prog: SYSTEM(9001)<2,2>, etc
 
@@ -811,6 +797,11 @@ XTD(string)
   PRINT "This goes to print channel 5 as if 'PRINT ON 5'"
   ASSIGN 64 TO SYSTEM(1009)
   PRINT "Change the (page) depth to 64 lines on PC 5"
+  OPENPATH '/mygraphics' TO dirfv ELSE STOP
+  ASSIGN @TRUE TO SYSTEM(1017)  ;* set 'raw' read mode
+  READ logo.pcl FROM dirfv,'logo.pcl' ELSE STOP
+  PRINT logo.pcl ;* read and print a raw graphic
+  ASSIGN @FALSE TO SYSTEM(1017) ;* reset file read mode
   ASSIGN -1 TO SYSTEM(1)   ;* set PC back to user's terminal
   PRINT "Back on user's terminal"
   ~~~
@@ -832,27 +823,26 @@ XTD(string)
    > <2> custom select-list-active prompt string - eg `DEV>>`
    > <3> custom command-continuation prompt string - eg `DEV?>`
 
-## other SYSTEM() functions TBC
+## other SYSTEM() function info TBC
 
-~~~ mvbasic
-ASSIGN 1 TO SYSTEM(999)" which disables "Q" at the "Press... " prompt
-1002  indicates if file is in rotating file pool
-1003  indicates if print job is in process
-1005  0 if pagination is disabled, 1 if enabled. Can ASSIGN to system(1005).
-1006  indicates if cursor is at left margin
-1012  page header (set with HEADING)
-1017  "ASSIGN 1 to SYSTEM(1017)" In UniData the equivalent command for no conversion is "NOCONVERT [ON | OFF]". Use to read/write binary files in directories.
-1030  parse @sentence retaining quoted literals (returns @fm delimited string), i.e THIS IS "MY TEST" on command line will be returned as THIS @fm IS @fm MY TEST ( 3 instead of 4 arguments)
-1050  TRAP key array (set with KEYTRAP and documented in KEYEDIT)
-1301  effective user name
-1302 LISTU data, one attribute per user (not confirmed)
-ASSIGN TO SYSTEM(3001) through SYSTEM(3005) to fire counters for the Windows NT performance monuitor.
-4001  0 for normal command line prompt (">"). Set to 1 to change the command line prompt to the value of System(4002).
-4002  the replacement command line prompt, e.g., ":" instead of ">". Can be multiple chars, e.g., "DEV>". This is actually a dynamic array: <1> is the replacement string for the normal prompt; <2> for the select-list-active prompt; <3> the command continuation prompt.
-9001  returns name of current subroutine -- actually name of current object path in SYSTEM(9001)<1,2>.
-      The dynamic array returned contains the whole stack of object paths. Aborts if called by UO.NET.
-9010  Returns database type UD, UV, UD.PE or UV.PE (udt 7.1.5 or later)
-~~~
+| Code | Description |
+|-|-|
+|0999 | ASSIGN `@TRUE` TO SYSTEM(999)" which disables "Q" at the "Press... " prompt |
+|1002 | Indicates if file is in rotating file pool |
+|1003 | Indicates if print job is in process |
+|1005 | `@FALSE` if pagination is disabled, `@TRUE` if enabled. Can ASSIGN to system(1005). |
+|1006 | Indicates if cursor is at left margin |
+|1012 | Page header (set with HEADING) |
+|1017 | ASSIGN `@TRUE` to SYSTEM(1017). In UniData the equivalent command for no conversion is "NOCONVERT [ON \| OFF]". |
+|1030 | Parse `@SENTENCE` retaining quoted literals (returns `@AM` delimited string), i.e THIS IS "MY TEST" on command line will be returned as THIS`@AM`IS`@AM`MY TEST ( 3 instead of 4 arguments) |
+|1050 | TRAP key array (set with KEYTRAP and documented in KEYEDIT) |
+|1301 | Effective user name |
+|1302 | LISTU data, one attribute per user (not confirmed) |
+|3001 | ASSIGN TO SYSTEM(3001) through SYSTEM(3005) to fire counters for the Windows NT performance monitor. |
+|4001 | `@FALSE` for normal command line prompt (">"). Set to `@TRUE` to change the command line prompt to the value of System(4002). |
+|4002 | Dynamic Array<3>. The replacement command line prompt, e.g., ":" instead of ">". Can be multiple chars, e.g., "DEV>". `<1>` is the replacement string for the normal prompt; `<2>` for the select-list-active prompt; `<3>` the command continuation prompt. |
+|9001 | returns name of current subroutine -- actually name of current object path in SYSTEM(9001)<1,2>. The dynamic array returned contains the whole stack of object paths. Aborts if called by UO.NET. |
+|9010 | Returns database type UD, UV, UD.PE or UV.PE (UDT 7.1.5 or later) |
 
 ## BASIC subroutines TBC
 
