@@ -10,22 +10,22 @@
 ### Arithmetic Operators
 
 <!-- ~~~ mvbasic -->
-> expression **+** expression
-> expression **-** expression
-> expression **\*** expression
-> expression **/** expression
+> expression **+** expression  
+> expression **-** expression  
+> expression **\*** expression  
+> expression **/** expression  
 > expression **^** expression  _;* (**)_
 
 ### Compound Assignment Operators
 
-> variable **=** expression
-> variable **+=** expression _;* var = var + exp_
-> variable **-=** expression _;* var = var - exp_
+> variable **=** expression  
+> variable **+=** expression _;* var = var + exp_  
+> variable **-=** expression _;* var = var - exp_  
 > variable **:=** expression _;* var = var : exp_
 
 ### Logical Operators
 
-> expression **AND** expression _;* (&)_
+> expression **AND** expression _;* (&)_  
 > expression **OR** expression  _;* (!)_
 > **NOT**(expression)
 
@@ -35,35 +35,35 @@
 
 ### Relational Operators
 
-> expression **=** expression  _;* (EQ)_
-> expression **#** expression  _;* (NE,<>,><)_
-> expression **<** expression  _;* (LT)_
-> expression **>** expression  _;* (GT)_
-> expression **<=** expression _;* (LE,=<,#>)_
+> expression **=** expression  _;* (EQ)_  
+> expression **#** expression  _;* (NE,<>,><)_  
+> expression **<** expression  _;* (LT)_  
+> expression **>** expression  _;* (GT)_  
+> expression **<=** expression _;* (LE,=<,#>)_  
 > expression **>=** expression _;* (GE,=>,#<)_
 
 ### String Operators
 
-> expression **:** expression
-> expression **[** [ start,] [-]length **]**
+> expression **:** expression  
+> expression **[** [ start,] [-]length **]**  
 > expression **[** delimiter, occurrence, fields **]** _;* FIELD(delimiter, occurrence, fields)_
 
 #### Equivalent Dynamic Array Logical and Relational Functions
 
-> ADDS(exp1, exp2)
-> ANDS(exp1, exp2)
-> CATS(exp1, exp2)
-> DIVS(exp1, exp2)
-> EQS(exp1, exp2)
-> GES(exp1, exp2)
-> GTS(exp1, exp2)
-> IFS(exp1, exp2, exp3)
-> LES(exp1, exp2)
-> LTS(exp1, exp2)
-> MULS(exp1, exp1)
-> NES(exp1, exp2)
-> NOTS(exp1)
-> ORS(exp1, exp2)
+> ADDS(exp1, exp2)  
+> ANDS(exp1, exp2)  
+> CATS(exp1, exp2)  
+> DIVS(exp1, exp2)  
+> EQS(exp1, exp2)  
+> GES(exp1, exp2)  
+> GTS(exp1, exp2)  
+> IFS(exp1, exp2, exp3)  
+> LES(exp1, exp2)  
+> LTS(exp1, exp2)  
+> MULS(exp1, exp1)  
+> NES(exp1, exp2)  
+> NOTS(exp1)  
+> ORS(exp1, exp2)  
 > SUBS(exp1, exp2)
 
 ## Statements and Functions
