@@ -784,6 +784,76 @@ Sometimes called "@Variables". ( _RO_ = Read-Only).
 | @YEAR | | Current year (2 digits). |
 | @YEAR4 | | Current year (4 digits). |
 
+## PI Dynamic Array subroutines
+
+CALL _!SUBROUTINE_(params...)
+
+| Subroutine | Equivalent Basic Function |
+|-|-|
+| !ASYNC(key, line, data, count, carrier) _;* !AMLC_ | |
+| !EDIT.INPUT(keys, wcol, wrow, wwidth, buffer, startpos, bwidth, ftable, code) | |
+| !ERRNO(variable) | |
+| !FCMP(result, number1, number2) | |
+| !GET.KEY(string, code) | |
+| !GET.PARTNUM(file, record.ID, partnum, status) | |
+| !GET.PATHNAME(pathname, directoryname, filename, status) | |
+| !GET.USER.COUNTS(uv.users, max.uv.users, os.users) | |
+| !GET.USERS(uv.users,max.users,sys.users,user.info,code) | |
+| !GETPU(key, print.channel, set.value, return.code) | |
+| !INLINE.PROMPTS(result, string) | |
+| !INTS(result, dynamic.array) | |
+| !MAKE.PATHNAME(path1, path2, result, status) | |
+| !MATCHES(result, dynamic. array, match.pattern) | |
+| !MESSAGE(key, username, usernum, message, status) | |
+| !PACK.FNKEYS(trap.list, ftable) | |
+| !REPORT.ERROR(command, subroutine, code) | |
+| !SET.PTR(print.channel, width, length, top.margin, bottom.margin, mode, options) | |
+| !SETPU(key, print.channel, new.value, return.code) | |
+| !TIMDAT(variable) | |
+| !USER.TYPE(type, admin) | |
+| !VOC.PATHNAME(data/dict, voc.entry, result, status) | |
+| !ADDS(return.array, array1, array2) | ADDS |
+| !ANDS(return.array, array1, array2) | ANDS |
+| !CATS(return.array, array1, array2) | CATS |
+| !CHARS(return.array, array1) | CHARS |
+| !CLEAR.PROMPTS | CLEARPROMPTS |
+| !COUNTS(return.array, dynamic.array, substring) | COUNTS |
+| !DISLEN(return.array, dynamic.array [,mapname]) | LENDP |
+| !DIVS(return.array, array1, array2) | DIVS |
+| !EQS(return.array, array1, array2) | EQS |
+| !FADD(return.array, array1, array2) | FADD |
+| !FDIV(return.array, array1, array2) | FDIV |
+| !FIELDS(return.array, dynamic.array, delimiter, occurrence,num.substr) | FIELDS |
+| !FMTS(return.array, dynamic.array, format) | FMTS |
+| !FMUL(return.array, number1, number2) | FMUL |
+| !FOLD(subdivided.string, string, length) | FOLD |
+| !FSUB(result, number1, number2) | FSUB |
+| !GES(return.array, array1, array2) | GES |
+| !GTS(return.array, array1, array2) | GTS |
+| !ICONVS | ICONVS |
+| !IFS | IFS |
+| !INDEXS | INDEXS |
+| !LENS(return.array, dynamic.array) | LENS |
+| ??!LENSDP(return.array, dynamic.array [,mapname]) | LENSDP |
+| !LES | LES |
+| !LTS | LTS |
+| !MAXIMUM | MAXIMUM |
+| !MINIMUM | MINIMUM |
+| !MODS | MODS |
+| !MULS | MULS |
+| !NES | NES |
+| !NOTS | NOTS |
+| !NUMS | NUMS |
+| !OCONVS | OCONVS |
+| !ORS | ORS |
+| !SEQS | SEQS |
+| !SPACES | SPACES |
+| !SPLICE | SPLICE |
+| !STRS | STRS |
+| !SUBS | SUBS |
+| !SUBSTRINGS | SUBSTRINGS |
+| !SUMMATION | SUMMATION |
+
 ## Special SYSTEM() functions
 
 \<\<TBC\>\>
@@ -858,73 +928,6 @@ Sometimes called "@Variables". ( _RO_ = Read-Only).
    > <1> custom uvshell prompt string - eg `DEV#>`
    > <2> custom select-list-active prompt string - eg `DEV>>`
    > <3> custom command-continuation prompt string - eg `DEV?>`
-
-## BASIC subroutines
-
-| Subroutine | Equivalent Function |
-|-|-|
-| !ASYNC(key, line, data, count, carrier) _;* !AMLC_ | |
-| !EDIT.INPUT(keys, wcol, wrow, wwidth, buffer, startpos, bwidth, ftable, code) | |
-| !ERRNO(variable) | |
-| !FCMP(result, number1, number2) | |
-| !GET.KEY(string, code) | |
-| !GET.PARTNUM(file, record.ID, partnum, status) | |
-| !GET.PATHNAME(pathname, directoryname, filename, status) | |
-| !GET.USER.COUNTS(uv.users, max.uv.users, os.users) | |
-| !GET.USERS(uv.users,max.users,sys.users,user.info,code) | |
-| !GETPU(key, print.channel, set.value, return.code) | |
-| !INLINE.PROMPTS(result, string) | |
-| !INTS(result, dynamic.array) | |
-| !MAKE.PATHNAME(path1, path2, result, status) | |
-| !MATCHES(result, dynamic. array, match.pattern) | |
-| !MESSAGE(key, username, usernum, message, status) | |
-| !PACK.FNKEYS(trap.list, ftable) | |
-| !REPORT.ERROR(command, subroutine, code) | |
-| !SET.PTR(print.channel, width, length, top.margin, bottom.margin, mode, options) | |
-| !SETPU(key, print.channel, new.value, return.code) | |
-| !TIMDAT(variable) | |
-| !USER.TYPE(type, admin) | |
-| !VOC.PATHNAME(data/dict, voc.entry, result, status) | |
-| !ADDS | ADDS |
-| !ANDS | ANDS |
-| !CATS | CATS |
-| !CHARS | CHARS |
-| !CLEAR.PROMPTS | CLEARPROMPTS |
-| !COUNTS | COUNTS |
-| !DISLEN | LENDP |
-| !DIVS | DIVS |
-| !EQS | EQS |
-| !FADD | FADD |
-| !FDIV | FDIV |
-| !FIELDS | FIELDS |
-| !FMTS | FMTS |
-| !FMUL | FMUL |
-| !FOLD | FOLD |
-| !FSUB | FSUB |
-| !GES | GES |
-| !GTS | GTS |
-| !ICONVS | ICONVS |
-| !IFS | IFS |
-| !INDEXS | INDEXS |
-| !LENS | LENS |
-| !LES | LES |
-| !LTS | LTS |
-| !MAXIMUM | MAXIMUM |
-| !MINIMUM | MINIMUM |
-| !MODS | MODS |
-| !MULS | MULS |
-| !NES | NES |
-| !NOTS | NOTS |
-| !NUMS | NUMS |
-| !OCONVS | OCONVS |
-| !ORS | ORS |
-| !SEQS | SEQS |
-| !SPACES | SPACES |
-| !SPLICE | SPLICE |
-| !STRS | STRS |
-| !SUBS | SUBS |
-| !SUBSTRINGS | SUBSTRINGS |
-| !SUMMATION | SUMMATION |
 
 ---
 The end
