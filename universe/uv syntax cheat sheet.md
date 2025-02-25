@@ -1,9 +1,9 @@
 # Rocket UniVerse (U2) mvbasic cheat sheet
 
-Simple syntax listing. See Rocket's online documentation for more info
-Scraped from the UV Basic documentation v11.4.1 Aug 2023 [UNV-1141-BASR-1]
-Keywords are case insensitive eg `ACTIVATEKEY` ≈ `ActivateKey` ≈ `activatekey`
-Comments may appear at end of line _`;* comment`_
+- Simple syntax listing. See Rocket's online documentation for more info
+- Scraped from the UV Basic documentation v11.4.1 Aug 2023 [UNV-1141-BASR-1]
+- Keywords are case insensitive eg `ACTIVATEKEY` ≈ `ActivateKey` ≈ `activatekey`
+- Comments may appear at end of line _`;* comment`_
 
 ## Operators
 
@@ -11,23 +11,23 @@ Comments may appear at end of line _`;* comment`_
 
 <!-- ~~~ mvbasic -->
 > expression **+** expression
-expression **-** expression
-expression **\*** expression
-expression **/** expression
-expression **^** expression  _;* (**)_
+> expression **-** expression
+> expression **\*** expression
+> expression **/** expression
+> expression **^** expression  _;* (**)_
 
 ### Compound Assignment Operators
 
 > variable **=** expression
-variable **+=** expression _;* var = var + exp_
-variable **-=** expression _;* var = var - exp_
-variable **:=** expression _;* var = var : exp_
+> variable **+=** expression _;* var = var + exp_
+> variable **-=** expression _;* var = var - exp_
+> variable **:=** expression _;* var = var : exp_
 
 ### Logical Operators
 
 > expression **AND** expression _;* (&)_
-expression **OR** expression  _;* (!)_
-**NOT**(expression)
+> expression **OR** expression  _;* (!)_
+> **NOT**(expression)
 
 ### Pattern Matching Operators
 
@@ -36,35 +36,35 @@ expression **OR** expression  _;* (!)_
 ### Relational Operators
 
 > expression **=** expression  _;* (EQ)_
-expression **#** expression  _;* (NE,<>,><)_
-expression **<** expression  _;* (LT)_
-expression **>** expression  _;* (GT)_
-expression **<=** expression _;* (LE,=<,#>)_
-expression **>=** expression _;* (GE,=>,#<)_
+> expression **#** expression  _;* (NE,<>,><)_
+> expression **<** expression  _;* (LT)_
+> expression **>** expression  _;* (GT)_
+> expression **<=** expression _;* (LE,=<,#>)_
+> expression **>=** expression _;* (GE,=>,#<)_
 
 ### String Operators
 
 > expression **:** expression
-expression **[** [ start,] [-]length **]**
-expression **[** delimiter, occurrence, fields **]** _;* FIELD(delimiter, occurrence, fields)_
+> expression **[** [ start,] [-]length **]**
+> expression **[** delimiter, occurrence, fields **]** _;* FIELD(delimiter, occurrence, fields)_
 
 #### Equivalent Dynamic Array Logical and Relational Functions
 
 > ADDS(exp1, exp2)
-ANDS(exp1, exp2)
-CATS(exp1, exp2)
-DIVS(exp1, exp2)
-EQS(exp1, exp2)
-GES(exp1, exp2)
-GTS(exp1, exp2)
-IFS(exp1, exp2, exp3)
-LES(exp1, exp2)
-LTS(exp1, exp2)
-MULS(exp1, exp1)
-NES(exp1, exp2)
-NOTS(exp1)
-ORS(exp1, exp2)
-SUBS(exp1, exp2)
+> ANDS(exp1, exp2)
+> CATS(exp1, exp2)
+> DIVS(exp1, exp2)
+> EQS(exp1, exp2)
+> GES(exp1, exp2)
+> GTS(exp1, exp2)
+> IFS(exp1, exp2, exp3)
+> LES(exp1, exp2)
+> LTS(exp1, exp2)
+> MULS(exp1, exp1)
+> NES(exp1, exp2)
+> NOTS(exp1)
+> ORS(exp1, exp2)
+> SUBS(exp1, exp2)
 
 ## Statements and Functions
 
@@ -771,59 +771,9 @@ nb The Read-Only (RO) indicator below is not always correct [taken from UNV-1141
 | @YEAR |   | Current year (2 digits). |
 | @YEAR4 |   | Current year (4 digits). |
 
-## Special SYSTEM() functions
+## Special SYSTEM() functions \<\<TBC\>\>
 
 (_int_ = integer, _bool_= Boolean)
-
-- **SYSTEM(1030)** returns _@AM_ delimited version of _@SENTENCE_ [per space, "except quotes"]
-  - eg _>PROG\_ARG1\_"ARG\_2"\_ \_ARG4_ -> PROG`@AM`ARG1`@AM`ARG 2`@AM` `@AM`ARG4
-
-- **SYSTEM(9001)** returns call stack. Name of current prog: SYSTEM(9001)<1,2>, parent prog: SYSTEM(9001)<2,2>, etc
-
-- **ASSIGN _int_ TO SYSTEM(1)** sets print channel _int_ active. [default] _int_ = -1
-
-  _Use the following in conjunction with SYSTEM(1), active printer channel_
-
-  - ASSIGN _bool_ TO SYSTEM(1005) turn on/off pagination [true=on/false=off]
-  - ASSIGN _int_ TO SYSTEM(1008) changes active printer channel width to _int_
-  - ASSIGN _int_ TO SYSTEM(1009) changes active printer channel depth to _int_
-  - ASSIGN _int_ TO SYSTEM(1010) changes active printer channel top margin to _int_
-  - ASSIGN _int_ TO SYSTEM(1011) changes active printer channel bottom margin to _int_
-
-  Example
-  
-  ~~~ mvbasic
-  ASSIGN 5 TO SYSTEM(1)    ;* set to print channel 5
-  PRINT "This goes to print channel 5 as if 'PRINT ON 5'"
-  ASSIGN 64 TO SYSTEM(1009)
-  PRINT "Change the (page) depth to 64 lines on PC 5"
-  OPENPATH '/mygraphics' TO dirfv ELSE STOP
-  ASSIGN @TRUE TO SYSTEM(1017)  ;* set 'raw' read mode
-  READ logo.pcl FROM dirfv,'logo.pcl' ELSE STOP
-  PRINT logo.pcl ;* read and print a raw graphic
-  ASSIGN @FALSE TO SYSTEM(1017) ;* reset file read mode
-  ASSIGN -1 TO SYSTEM(1)   ;* set PC back to user's terminal
-  PRINT "Back on user's terminal"
-  ~~~
-
-- **ASSIGN _int_ TO SYSTEM(225)** changes active USERNO to _int_
-
-- **ASSIGN _bool_ TO SYSTEM(1017)** changes how Type19 records are read/written.
-  - ASSIGN _@TRUE_ TO SYSTEM(1017) will result in no conversion, so reads and writes will retain NL or @AM chars
-  - ASSIGN _@FALSE_ TO SYSTEM(1017) [default] will result in all NL (newline) chars converted to _@AM_ chars on reads, and _@AM_ chars to NL chars on writes
-
-- **ASSIGN _int_ TO SYSTEM(2101)** LIST.READU display
-
-- **ASSIGN _bool_ TO SYSTEM(4001)** enable/disable custom uvshell prompt
-  - ASSIGN _@TRUE_ TO SYSTEM(4001) enable custom uvshell prompt defined in SYSTEM(4002)
-  - ASSIGN _@FALSE_ TO SYSTEM(4001) disable custom uvshell prompt. Resumes default uvshell prompt (>)
-- **ASSIGN _dynamic.array_ TO SYSTEM(4002)** define custom uvshell prompt. Dynamic.array contains:
-
-   > <1> custom uvshell prompt string - eg `DEV#>`
-   > <2> custom select-list-active prompt string - eg `DEV>>`
-   > <3> custom command-continuation prompt string - eg `DEV?>`
-
-## other SYSTEM() function info TBC
 
 | Code | Description |
 |-|-|
@@ -844,7 +794,57 @@ nb The Read-Only (RO) indicator below is not always correct [taken from UNV-1141
 |9001 | returns name of current subroutine -- actually name of current object path in SYSTEM(9001)<1,2>. The dynamic array returned contains the whole stack of object paths. Aborts if called by UO.NET. |
 |9010 | Returns database type UD, UV, UD.PE or UV.PE (UDT 7.1.5 or later) |
 
-## BASIC subroutines TBC
+- **SYSTEM(1030)** returns _@AM_ delimited version of _@SENTENCE_ [per space, "except quotes"]
+  - eg _>PROG\_ARG1\_"ARG\_2"\_ \_ARG4_ -> PROG`@AM`ARG1`@AM`ARG 2`@AM` `@AM`ARG4
+
+- **SYSTEM(9001)** returns call stack. Name of current prog: SYSTEM(9001)<1,2>, parent prog: SYSTEM(9001)<2,2>, etc
+
+- **ASSIGN _int_ TO SYSTEM(1)** sets print channel _int_ active. [default] _int_ = -1
+
+  _Use the following in conjunction with SYSTEM(1), active printer channel_
+
+  - ASSIGN _bool_ TO SYSTEM(1005) turn on/off pagination [true=on/false=off]
+  - ASSIGN _int_ TO SYSTEM(1008) changes active printer channel width to _int_
+  - ASSIGN _int_ TO SYSTEM(1009) changes active printer channel depth to _int_
+  - ASSIGN _int_ TO SYSTEM(1010) changes active printer channel top margin to _int_
+  - ASSIGN _int_ TO SYSTEM(1011) changes active printer channel bottom margin to _int_
+
+  **Example**
+  
+  ~~~ mvbasic
+  ASSIGN 5 TO SYSTEM(1)    ;* set to print channel 5
+  PRINT "This goes to print channel 5 as if 'PRINT ON 5'"
+  ASSIGN 64 TO SYSTEM(1009)
+  PRINT "Change the (page) depth to 64 lines on PC 5"
+  OPENPATH '/mygraphics' TO dirfv ELSE STOP
+  ASSIGN @TRUE TO SYSTEM(1017)  ;* set 'raw' read mode
+  READ logo.pcl FROM dirfv,'logo.pcl' ELSE STOP
+  PRINT logo.pcl ;* read and print a raw graphic
+  ASSIGN @FALSE TO SYSTEM(1017) ;* reset file read mode
+  ASSIGN -1 TO SYSTEM(1)   ;* set PC back to user's terminal
+  PRINT "Back on user's terminal"
+  ~~~
+
+- **ASSIGN _int_ TO SYSTEM(225)** changes active USERNO to _int_
+
+- **ASSIGN _bool_ TO SYSTEM(999)"** which enables(@false)/disables(@true) "Q" at the "Press... " prompt
+
+- **ASSIGN _bool_ TO SYSTEM(1017)** changes how Type19 records are read/written.
+  - ASSIGN _@TRUE_ TO SYSTEM(1017) will result in no conversion, so reads and writes will retain NL or @AM chars
+  - ASSIGN _@FALSE_ TO SYSTEM(1017) [default] will result in all NL (newline) chars converted to _@AM_ chars on reads, and _@AM_ chars to NL chars on writes
+
+- **ASSIGN _int_ TO SYSTEM(2101)** LIST.READU display
+
+- **ASSIGN _bool_ TO SYSTEM(4001)** enable/disable custom uvshell prompt
+  - ASSIGN _@TRUE_ TO SYSTEM(4001) enable custom uvshell prompt defined in SYSTEM(4002)
+  - ASSIGN _@FALSE_ TO SYSTEM(4001) disable custom uvshell prompt. Resumes default uvshell prompt (>)
+- **ASSIGN _dynamic.array_ TO SYSTEM(4002)** define custom uvshell prompt. Dynamic.array contains:
+
+   > <1> custom uvshell prompt string - eg `DEV#>`
+   > <2> custom select-list-active prompt string - eg `DEV>>`
+   > <3> custom command-continuation prompt string - eg `DEV?>`
+
+## BASIC subroutines \<\<TBC>>
 
 |Subroutine                                                                      |Equivalent Function |
 |--------------------------------------------------------------------------------|-                   |
