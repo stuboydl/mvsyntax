@@ -870,7 +870,7 @@ Sometimes called @ ("at") "variables". ( _RO_ = Read-Only).
 | @YEAR | | Current year (2 digits). |
 | @YEAR4 | | Current year (4 digits). |
 
-## PI Dynamic Array subroutines
+## PI dynamic array subroutines
 
 CALL _!SUBROUTINE_(params...) [or CALL _&ndash;SUBROUTINE_(params...)]
 
@@ -917,30 +917,35 @@ CALL _!SUBROUTINE_(params...) [or CALL _&ndash;SUBROUTINE_(params...)]
 | !SUBS(return.array, array1, array2) | SUBS |
 | !SUBSTRINGS(return.array, dynamic.array, start, length) | SUBSTRINGS |
 | !SUMMATION(result , dynamic.array ) | SUMMATION |
-| !ASYNC(key, line, data, count, carrier) _;* !AMLC_ | |
-| !EDIT.INPUT(keys, wcol, wrow, wwidth, buffer, startpos, bwidth, ftable, code) | |
-| !ERRNO(variable) | |
-| !FCMP(result, number1, number2) | |
-| !GET.KEY(string, code) | |
-| !GET.PARTNUM(file, record.ID, partnum, status) | |
-| !GET.PATHNAME(pathname, directoryname, filename, status) | |
-| !GET.USER.COUNTS(uv.users, max.uv.users, os.users) | |
-| !GET.USERS(uv.users,max.users,sys.users,user.info,code) | |
-| !GETPU(key, print.channel, set.value, return.code) | |
-| !INLINE.PROMPTS(result, string) | |
-| !INTS(result, dynamic.array) | |
-| !MAKE.PATHNAME(path1, path2, result, status) | |
-| !MATCHES(result, dynamic. array, match.pattern) | |
-| !MESSAGE(key, username, usernum, message, status) | |
-| !PACK.FNKEYS(trap.list, ftable) | |
-| !REPORT.ERROR(command, subroutine, code) | |
-| !SET.PTR(print.channel, width, length, top.margin, bottom.margin, mode, options) | |
-| !SETPU(key, print.channel, new.value, return.code) | |
-| !SQUOTE(quoted.expression, expression) | |
-| !SLEEP$(variable) | |
-| !TIMDAT(variable) | |
-| !USER.TYPE(type, admin) | |
-| !VOC.PATHNAME(data/dict, voc.entry, result, status) | |
+
+## PI other subroutines
+
+| Subroutine |
+|-|
+| !ASYNC(key, line, data, count, carrier) _;* !AMLC_ |
+| !EDIT.INPUT(keys, wcol, wrow, wwidth, buffer, startpos, bwidth, ftable, code) |
+| !ERRNO(variable) |
+| !FCMP(result, number1, number2) |
+| !GET.KEY(string, code) |
+| !GET.PARTNUM(file, record.ID, partnum, status) |
+| !GET.PATHNAME(pathname, directoryname, filename, status) |
+| !GET.USER.COUNTS(uv.users, max.uv.users, os.users) |
+| !GET.USERS(uv.users,max.users,sys.users,user.info,code) |
+| !GETPU(key, print.channel, set.value, return.code) |
+| !INLINE.PROMPTS(result, string) |
+| !INTS(result, dynamic.array) |
+| !MAKE.PATHNAME(path1, path2, result, status) |
+| !MATCHES(result, dynamic. array, match.pattern) |
+| !MESSAGE(key, username, usernum, message, status) |
+| !PACK.FNKEYS(trap.list, ftable) |
+| !REPORT.ERROR(command, subroutine, code) |
+| !SET.PTR(print.channel, width, length, top.margin, bottom.margin, mode, options) |
+| !SETPU(key, print.channel, new.value, return.code) |
+| !SQUOTE(quoted.expression, expression) |
+| !SLEEP$(variable) |
+| !TIMDAT(variable) |
+| !USER.TYPE(type, admin) |
+| !VOC.PATHNAME(data/dict, voc.entry, result, status) |
 
 ## Special SYSTEM() functions
 
@@ -959,19 +964,19 @@ CALL _!SUBROUTINE_(params...) [or CALL _&ndash;SUBROUTINE_(params...)]
 | 1008* | ASSIGN _int_ TO SYSTEM(1008) changes active printer channel width to _int_ |
 | 1009* | ASSIGN _int_ TO SYSTEM(1009) changes active printer channel depth to _int_ |
 | 1010* | ASSIGN _int_ TO SYSTEM(1010) changes active printer channel top margin to _int_ |
-| 1011* | ASSIGN _int_ TO SYSTEM(1011) changes active printer channel bottom margin to _ int_ |
+| 1011* | ASSIGN _int_ TO SYSTEM(1011) changes active printer channel bottom margin to _int_ |
 | 1012 | Page header (set with HEADING) |
-| 1017 | ASSIGN `@TRUE` to SYSTEM(1017). In UniData the equivalent command for no c onversion is "NOCONVERT [ON \| OFF]". |
-| 1030 | Parse `@SENTENCE` for spaces, returning `@AM` delimited string, accrue quoted s trings. i.e THIS IS "MY TEST" => THIS`@AM`IS`@AM`MY TEST (3 instead of 4 arguments) |
+| 1017 | ASSIGN `@TRUE` to SYSTEM(1017). In UniData the equivalent command for no conversion is "NOCONVERT [ON \| OFF]" |
+| 1030 | Parse `@SENTENCE` for spaces, returning `@AM` delimited string, accrue quoted strings<br>eg @SENTENCE = 'THIS IS "MY TEST"'; SYSTEM(1030) => THIS`@AM`IS`@AM`MY TEST |
 | 1050 | TRAP key array (set with KEYTRAP and documented in KEYEDIT) |
 | 1301 | Effective user name |
 | 1302 | LISTU data, one attribute per user (not confirmed) |
 | 2101 | ASSIGN _int_ TO SYSTEM(2101) LIST.READU display |
-| 3001 | ASSIGN TO SYSTEM(3001) to fire counters for the Windows NT performance monitor. |
-| 3002 | ASSIGN TO SYSTEM(3002) to fire counters for the Windows NT performance monitor. |
-| 3003 | ASSIGN TO SYSTEM(3003) to fire counters for the Windows NT performance monitor. |
-| 3004 | ASSIGN TO SYSTEM(3004) to fire counters for the Windows NT performance monitor. |
-| 3005 | ASSIGN TO SYSTEM(3005) to fire counters for the Windows NT performance monitor. |
+| 3001 | ASSIGN ? TO SYSTEM(3001) Windows performance monitor counter - tbc |
+| 3002 | ASSIGN ? TO SYSTEM(3002) Windows performance monitor counter - tbc |
+| 3003 | ASSIGN ? TO SYSTEM(3003) Windows performance monitor counter - tbc |
+| 3004 | ASSIGN ? TO SYSTEM(3004) Windows performance monitor counter - tbc |
+| 3005 | ASSIGN ? TO SYSTEM(3005) Windows performance monitor counter - tbc |
 | 4001 | `@FALSE` for normal command line prompt (">"). Set to `@TRUE` to change the command line prompt to the value of System(4002). |
 | 4002 | Dynamic Array<3>. Replacement command line prompt strings for SYSTEM(4001)<br>  <1> custom uvshell prompt string - eg `DEV#>`  <br>  <2> custom select-list-active prompt string - eg `DEV>>`  <br>  <3> custom command-continuation prompt string - eg `DEV?>`  |
 | 9001 | Returns multivalued subroutine call stack &ndash; Most recent in SYSTEM(9001)<1,2 >, SYSTEM(9001)<2,2>, etc. [Aborts if called by UO.NET?] |
@@ -979,23 +984,23 @@ CALL _!SUBROUTINE_(params...) [or CALL _&ndash;SUBROUTINE_(params...)]
 
 \* Used in conjunction with SYSTEM(1), active printer channel.
 
-   ###### Example
+###### Example
 
-   ~~~ mvbasic  
-   program example.assignations
-     assign 5 to system(1)    ;* set to print channel 5
-     print "This goes to print channel 5 as if 'PRINT ON 5'"
-     assign 64 to system(1009)
-     print "Change the (page) depth to 64 lines on PC 5"
-     openpath '/mygraphics' to dirfv else stop
-     assign @true to system(1017)  ;* set 'raw' read mode
-     read logo.pcl from dirfv,'logo.pcl' else stop
-     print logo.pcl ;* read and print a raw graphic
-     assign @false to system(1017) ;* reset file read mode
-     assign -1 to system(1)   ;* set PC back to user's terminal
-     print "Back on user's terminal"
-   end
-   ~~~
+~~~ mvbasic  
+program example.assignations
+  assign 5 to system(1)    ;* set to print channel 5
+  print "This goes to print channel 5 as if 'PRINT ON 5'"
+  assign 64 to system(1009)
+  print "Change the (page) depth to 64 lines on PC 5"
+  openpath '/mygraphics' to dirfv else stop
+  assign @true to system(1017)  ;* set 'raw' read mode
+  read logo.pcl from dirfv,'logo.pcl' else stop
+  print logo.pcl ;* read and print a raw graphic
+  assign @false to system(1017) ;* reset file read mode
+  assign -1 to system(1)   ;* set PC back to user's terminal
+  print "Back on user's terminal"
+end
+~~~
 
 ---
 The end
