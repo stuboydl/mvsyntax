@@ -15,7 +15,7 @@
   - [Relational Operators](#relational-operators)
   - [String Operators](#string-operators)
 - [Statements and Functions](#statements-and-functions)
-- [@Macros](#macros)
+- [Macros/@variables](#built-in-macros)
 - [PI Dynamic Subroutines](#pi-dynamic-array-subroutines)
 - [Special SYSTEM() Functions](#special-system-functions)
 
@@ -23,7 +23,6 @@
 
 ### Arithmetic Operators
 
-<!-- ~~~ mvbasic -->
 > expression **+** expression  
 > expression **-** expression  
 > expression **\*** expression  
@@ -945,78 +944,58 @@ CALL _!SUBROUTINE_(params...) [or CALL _&ndash;SUBROUTINE_(params...)]
 
 ## Special SYSTEM() functions
 
-\<\<TBC\>\>
-
 (_int_ = integer, _bool_ = Boolean)
 
 | Code | Description |
 |-|-|
-|0999 | ASSIGN `@TRUE` TO SYSTEM(999)" which disables "Q" at the "Press... " prompt |
-|1002 | Indicates if file is in rotating file pool |
-|1003 | Indicates if print job is in process |
-|1005 | `@FALSE` if pagination is disabled, `@TRUE` if enabled. Can ASSIGN to system(1005). |
-|1006 | Indicates if cursor is at left margin |
-|1012 | Page header (set with HEADING) |
-|1017 | ASSIGN `@TRUE` to SYSTEM(1017). In UniData the equivalent command for no conversion is "NOCONVERT [ON \| OFF]". |
-|1030 | Parse `@SENTENCE` retaining quoted literals (returns `@AM` delimited string), i.e THIS IS "MY TEST" on command line will be returned as THIS`@AM`IS`@AM`MY TEST ( 3 instead of 4 arguments) |
-|1050 | TRAP key array (set with KEYTRAP and documented in KEYEDIT) |
-|1301 | Effective user name |
-|1302 | LISTU data, one attribute per user (not confirmed) |
-|3001 | ASSIGN TO SYSTEM(3001) through SYSTEM(3005) to fire counters for the Windows NT performance monitor. |
-|4001 | `@FALSE` for normal command line prompt (">"). Set to `@TRUE` to change the command line prompt to the value of System(4002). |
-|4002 | Dynamic Array<3>. The replacement command line prompt, e.g., ":" instead of ">". Can be multiple chars, e.g., "DEV>". `<1>` is the replacement string for the normal prompt; `<2>` for the select-list-active prompt; `<3>` the command continuation prompt. |
-|9001 | returns name of current subroutine -- actually name of current object path in SYSTEM(9001)<1,2>. The dynamic array returned contains the whole stack of object paths. Aborts if called by UO.NET. |
-|9010 | Returns database type UD, UV, UD.PE or UV.PE (UDT 7.1.5 or later) |
+| 0001* | ASSIGN _int_ TO SYSTEM(1) sets print channel _int_ active. [default] _int_ = -1 |
+| 0225 | ASSIGN _int_ TO SYSTEM(225) changes active USERNO to _int_ |
+| 0999 | ASSIGN _bool_ TO SYSTEM(999)" which disables "Q" at the "Press... " prompt |
+| 1002 | Indicates if file is in rotating file pool |
+| 1003 | Indicates if print job is in process |
+| 1005* | `@FALSE` if pagination is disabled, `@TRUE` if enabled.|
+| 1005* | ASSIGN _bool_ TO SYSTEM(1005) turn on/off pagination [true=on/false=off] |
+| 1006* | Indicates if cursor is at left margin |
+| 1008* | ASSIGN _int_ TO SYSTEM(1008) changes active printer channel width to _int_ |
+| 1009* | ASSIGN _int_ TO SYSTEM(1009) changes active printer channel depth to _int_ |
+| 1010* | ASSIGN _int_ TO SYSTEM(1010) changes active printer channel top margin to _int_ |
+| 1011* | ASSIGN _int_ TO SYSTEM(1011) changes active printer channel bottom margin to _ int_ |
+| 1012 | Page header (set with HEADING) |
+| 1017 | ASSIGN `@TRUE` to SYSTEM(1017). In UniData the equivalent command for no c onversion is "NOCONVERT [ON \| OFF]". |
+| 1030 | Parse `@SENTENCE` for spaces, returning `@AM` delimited string, accrue quoted s trings. i.e THIS IS "MY TEST" => THIS`@AM`IS`@AM`MY TEST (3 instead of 4 arguments) |
+| 1050 | TRAP key array (set with KEYTRAP and documented in KEYEDIT) |
+| 1301 | Effective user name |
+| 1302 | LISTU data, one attribute per user (not confirmed) |
+| 2101 | ASSIGN _int_ TO SYSTEM(2101) LIST.READU display |
+| 3001 | ASSIGN TO SYSTEM(3001) to fire counters for the Windows NT performance monitor. |
+| 3002 | ASSIGN TO SYSTEM(3002) to fire counters for the Windows NT performance monitor. |
+| 3003 | ASSIGN TO SYSTEM(3003) to fire counters for the Windows NT performance monitor. |
+| 3004 | ASSIGN TO SYSTEM(3004) to fire counters for the Windows NT performance monitor. |
+| 3005 | ASSIGN TO SYSTEM(3005) to fire counters for the Windows NT performance monitor. |
+| 4001 | `@FALSE` for normal command line prompt (">"). Set to `@TRUE` to change the command line prompt to the value of System(4002). |
+| 4002 | Dynamic Array<3>. Replacement command line prompt strings for SYSTEM(4001)<br>  <1> custom uvshell prompt string - eg `DEV#>`  <br>  <2> custom select-list-active prompt string - eg `DEV>>`  <br>  <3> custom command-continuation prompt string - eg `DEV?>`  |
+| 9001 | Returns multivalued subroutine call stack &ndash; Most recent in SYSTEM(9001)<1,2 >, SYSTEM(9001)<2,2>, etc. [Aborts if called by UO.NET?] |
+| 9010 | Returns database type UD, UV, UD.PE or UV.PE (UDT 7.1.5 or later) |
 
-- **SYSTEM(1030)** returns _@AM_ delimited version of _@SENTENCE_ [per space, "except quotes"]
-  - eg _>PROG\_ARG1\_"ARG\_2"\_ \_ARG4_ -> PROG`@AM`ARG1`@AM`ARG 2`@AM` `@AM`ARG4
+\* Used in conjunction with SYSTEM(1), active printer channel.
 
-- **SYSTEM(9001)** returns call stack. Name of current prog: SYSTEM(9001)<1,2>, parent prog: SYSTEM(9001)<2,2>, etc
+   ###### Example
 
-- **ASSIGN _int_ TO SYSTEM(1)** sets print channel _int_ active. [default] _int_ = -1
-
-  _Use the following in conjunction with SYSTEM(1), active printer channel_
-
-  - ASSIGN _bool_ TO SYSTEM(1005) turn on/off pagination [true=on/false=off]
-  - ASSIGN _int_ TO SYSTEM(1008) changes active printer channel width to _int_
-  - ASSIGN _int_ TO SYSTEM(1009) changes active printer channel depth to _int_
-  - ASSIGN _int_ TO SYSTEM(1010) changes active printer channel top margin to _int_
-  - ASSIGN _int_ TO SYSTEM(1011) changes active printer channel bottom margin to _int_
-
-  **Example**
-  
-  ~~~ mvbasic
-  ASSIGN 5 TO SYSTEM(1)    ;* set to print channel 5
-  PRINT "This goes to print channel 5 as if 'PRINT ON 5'"
-  ASSIGN 64 TO SYSTEM(1009)
-  PRINT "Change the (page) depth to 64 lines on PC 5"
-  OPENPATH '/mygraphics' TO dirfv ELSE STOP
-  ASSIGN @TRUE TO SYSTEM(1017)  ;* set 'raw' read mode
-  READ logo.pcl FROM dirfv,'logo.pcl' ELSE STOP
-  PRINT logo.pcl ;* read and print a raw graphic
-  ASSIGN @FALSE TO SYSTEM(1017) ;* reset file read mode
-  ASSIGN -1 TO SYSTEM(1)   ;* set PC back to user's terminal
-  PRINT "Back on user's terminal"
-  ~~~
-
-- **ASSIGN _int_ TO SYSTEM(225)** changes active USERNO to _int_
-
-- **ASSIGN _bool_ TO SYSTEM(999)"** which enables(@false)/disables(@true) "Q" at the "Press... " prompt
-
-- **ASSIGN _bool_ TO SYSTEM(1017)** changes how Type19 records are read/written.
-  - ASSIGN _@TRUE_ TO SYSTEM(1017) will result in no conversion, so reads and writes will retain NL or @AM chars
-  - ASSIGN _@FALSE_ TO SYSTEM(1017) [default] will result in all NL (newline) chars converted to _@AM_ chars on reads, and _@AM_ chars to NL chars on writes
-
-- **ASSIGN _int_ TO SYSTEM(2101)** LIST.READU display
-
-- **ASSIGN _bool_ TO SYSTEM(4001)** enable/disable custom uvshell prompt
-  - ASSIGN _@TRUE_ TO SYSTEM(4001) enable custom uvshell prompt defined in SYSTEM(4002)
-  - ASSIGN _@FALSE_ TO SYSTEM(4001) disable custom uvshell prompt. Resumes default uvshell prompt (>)
-- **ASSIGN _dynamic.array_ TO SYSTEM(4002)** define custom uvshell prompt. Dynamic.array contains:
-
-   > <1> custom uvshell prompt string - eg `DEV#>`
-   > <2> custom select-list-active prompt string - eg `DEV>>`
-   > <3> custom command-continuation prompt string - eg `DEV?>`
+   ~~~ mvbasic  
+   program example.assignations
+     assign 5 to system(1)    ;* set to print channel 5
+     print "This goes to print channel 5 as if 'PRINT ON 5'"
+     assign 64 to system(1009)
+     print "Change the (page) depth to 64 lines on PC 5"
+     openpath '/mygraphics' to dirfv else stop
+     assign @true to system(1017)  ;* set 'raw' read mode
+     read logo.pcl from dirfv,'logo.pcl' else stop
+     print logo.pcl ;* read and print a raw graphic
+     assign @false to system(1017) ;* reset file read mode
+     assign -1 to system(1)   ;* set PC back to user's terminal
+     print "Back on user's terminal"
+   end
+   ~~~
 
 ---
 The end
