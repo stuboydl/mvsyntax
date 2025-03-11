@@ -80,7 +80,9 @@
 > ORS(exp1, exp2)  
 > SUBS(exp1, exp2)
 
-## Statements and Functions
+### Statements and Functions
+
+#### Symbols
 
 ~~~ mvbasic
 ! [comment.text]                    ;* "*", REM, $*
@@ -103,6 +105,11 @@ $UNDEFINE identifier
 dynamic.array< field# [ ,value# [,subvalue#]] >
 @(column [,row])
 @(–code [,arg ])
+~~~
+
+#### A
+
+~~~ mvbasic
 ABORT [expression …]
 ABORTE [expression …]
 ABORTM [expression …]
@@ -132,6 +139,11 @@ ATAN(expression)
 AuditLog(Originator, Action, File, Record, Info, Status, {OldData},{NewData})
 AUTHORIZATION "username"
 AUXMAP { ON | OFF | expression }
+~~~
+
+#### B
+
+~~~ mvbasic
 BEGIN CASE
    CASE expression ...
    END CASE
@@ -153,6 +165,11 @@ BYTE(expression)
 BYTELEN(expression)
 BYTETYPE(value)
 BYTEVAL(expression [, n] )
+~~~
+
+#### C
+
+~~~ mvbasic
 CALL name [([MAT] argument [, [MAT] argument …])]
 CATS(dynamic.array1, dynamic.array2)
 CENTURY.PIVOT(year | nn )
@@ -191,6 +208,11 @@ createRequest(URL, http_method, request_handle)
 createSecureRequest(URL, http_method, request_handle, security_context)
 createSecurityContext(context, “protocol version:[rule],...”)
 CRT [print.list]
+~~~
+
+#### D
+
+~~~ mvbasic
 DATA expression [,expression …]
 DATE()
 DATETIMEL()
@@ -218,6 +240,11 @@ DIVS(dynamic.array1, dynamic.array2)
 DOWNCASE(expression)
 DQUOTE(expression)
 DTX(number [,size] )
+~~~
+
+#### E
+
+~~~ mvbasic
 EBCDIC(expression)
 ECHO {ON | OFF | expression}
 ENABLEDEC filename [, multilevel-filename], { ALL |field_list} [ON ERROR statements]
@@ -242,6 +269,11 @@ EXECUTE commands [ ,//IN. < expression] [,//OUT. > variable] [,//SELECT.[(list)]
 EXIT
 EXP(expression)
 EXTRACT(dynamic.array, field#[,value# [,subvalue#]] )
+~~~
+
+#### F
+
+~~~ mvbasic
 FADD(number1, number2)
 FDIV(number1, number2)
 FFIX(number)
@@ -268,6 +300,11 @@ FOR variable = start TO end [STEP increment] [loop.statements] [CONTINUE | EXIT]
 FORMLIST [variable] [TO list.number] [ON ERROR statements]
 FSUB(number1, number2)
 FUNCTION [name] [( [MAT] variable [, [MAT] variable …] )]
+~~~
+
+#### G
+
+~~~ mvbasic
 GARBAGECOLLECT ;*? reserved word - not verb
 GCI ;*? reserved word - not verb
 GCDISTANCE(lat1,lon1,lat2,lon2)
@@ -296,6 +333,11 @@ GO TO statement.label [:]
 GROUP(string, delimiter, occurrence [,num.substr] )
 GROUPSTORE new.string IN string USING start, n [ ,delimiter]
 GTS(dynamic.array1, dynamic.array2)
+~~~
+
+#### H,I
+
+~~~ mvbasic
 HEADING [ON print.channel] heading
 HEADINGE [ON print.channel] heading
 HEADINGN [ON print.channel] heading
@@ -331,6 +373,11 @@ INT(expression)
 ISNULL(variable)
 ISNULLS(dynamic.array)
 ITYPE(i.type)
+~~~
+
+#### J,K,L
+
+~~~ mvbasic
 KEYEDIT(function, key) [, (function, key)] …
 KEYEXIT(value, key) [, (value, key)] …
 KEYIN()
@@ -352,6 +399,11 @@ LOCK expression [THEN statements] [ELSE statements]
 LOOP [CONTINUE | EXIT] [{WHILE | UNTIL} expression [DO]] [loop.statements] [CONTINUE | EXIT] REPEAT
 LOWER(expression)
 LTS(dynamic.array1, dynamic.array2)
+~~~
+
+#### M
+
+~~~ mvbasic
 MAT dim.array = expression
 MAT dim.array1 = MAT dim.array2
 MATBUILD dynamic.array FROM dim.array [,start [,end]] [USING delimiter]
@@ -377,6 +429,11 @@ MQOPEN(hConn, objDesc, options, hObj)
 MQPUT(hConn, hObj, msgDesc, putMsgOpts, msg)
 MQPUT1(hConn, objDesc, msgDesc, putMsgOpts, msg)
 MULS(dynamic.array1, dynamic.array2)
+~~~
+
+#### N,O
+
+~~~ mvbasic
 NAP [milliseconds]
 NEG(number)
 NEGS(dynamic.array)
@@ -403,6 +460,11 @@ openSecureSocket(name_or_IP, port, mode, timeout, socket_handle, context)
 openSocket(name_or_IP, port, mode, timeout, socket_handle)
 OpenXMLData(xml_handle,xml_data_extraction_rule, xml_data_handle)
 ORS(dynamic.array1, dynamic.array2)
+~~~
+
+#### P,Q
+
+~~~ mvbasic
 PAGE [ON print.channel] [page#]
 PERFORM command
 PRECISION expression
@@ -425,6 +487,11 @@ PyGetAttr(pyobject, attrName)
 PyImport(moduleName)
 PySetAttr(pyobject, attrName, value)
 QUOTE(expression)
+~~~
+
+#### R
+
+~~~ mvbasic
 RAISE(expression)
 RANDOMIZE [(expression)]
 READ  dynamic.array  FROM [file.variable,] record.ID [ON ERROR  statements] { THEN  statements [ELSE  statements] | ELSE  statements }
@@ -461,6 +528,11 @@ ROLLBACK [WORK] [THEN statements] [ELSE statements ]
 RPC.CALL(connection.ID, procedure, #args, MAT arg.list, #values, MAT return.list)
 RPC.CONNECT(host, server)
 RPC.DISCONNECT(connection.ID)
+~~~
+
+#### S
+
+~~~ mvbasic
 saveSecurityContext(context, name, passPhrase)
 SADD(string.number.1, string.number.2)
 SCMP(string.number.1, string.number.2)
@@ -495,7 +567,7 @@ showSecurityContext(context, config)
 SIGNATURE(algorithm, action, data, dataLoc, key, keyLoc, keyFmt, pass, sigIn, result, p12pass)
 SIN(expression)
 SINH(expression)
-SLEEP [seconds | hh:mm[:ss]]
+SLEEP [seconds | hh:mm[:ss]] ;* !SLEEP$()
 SMUL(string.number.1, string.number.2)
 SOAPCreateRequest(URL, soapAction, Request)
 SOAPCreateSecureRequest(URL, soapAction, Request, security_context)
@@ -567,6 +639,11 @@ SUMMATION(dynamic.array)
 SWAP variable1, variable2
 SWAP MAT dim.array, MAT dim.array
 SYSTEM(expression)
+~~~
+
+#### T
+
+~~~ mvbasic
 TABSTOP expression
 TAN(expression)
 TANH(expression)
@@ -592,6 +669,11 @@ TRIMS(dynamic.array)
 TTYCTL file.variable, code# {THEN statements [ELSE statements] | ELSE statements}
 TTYGET variable [FROM {file.variable | LPTR [n] | MTU [n] }]TTYGET statement {THEN statements [ELSE statements] | ELSE statements}
 TTYSET dynamic.array [ON {file.variable | LPTR [n] | MTU [n] }] {THEN statements [ELSE statements] | ELSE statements}
+~~~
+
+#### U,V,W
+
+~~~ mvbasic
 UDOArrayAppendItem(udoHandle, value)
 UDOArrayDeleteItem(udoHandle,index)
 UDOArrayGetItem(udoHandle, index, value[out], value_type[out])
@@ -635,6 +717,11 @@ WRITESEQ expression {ON | TO} file.variable [ON ERROR statements] {THEN statemen
 WRITESEQF expression {ON | TO} file.variable [ON ERROR statements] {THEN statements [ELSE statements] | ELSE statements}
 writeSocket(socket_handle, socket_data, time_out, mode, actual_write_size)
 WRITET [UNIT (mtu)] variable {THEN statements [ELSE statements] | ELSE statements}
+~~~
+
+#### X,Y,Z
+
+~~~ mvbasic
 XDOMAddChild(xmlHandle, xpathString, nsMap, nodeHandle, dupFlag,nodeType)
 XDOMAppend(xmlHandle, xpathString, nsMap, nodeHandle, dupFlag)
 XDOMClone(xmlHandle, newXmlHandle, depth)
@@ -683,9 +770,9 @@ XMLTODB(xml_document, doc_flag, u2xmapping_rules, u2xmap_ flag, status)
 XTD(string)
 ~~~
 
-## @Macros
+## Built-in macros
 
-Sometimes called "@Variables". ( _RO_ = Read-Only).
+Sometimes called @ ("at") "variables". ( _RO_ = Read-Only).
 
 | Macro | RO | Description |
 |-|-|-|
@@ -786,12 +873,51 @@ Sometimes called "@Variables". ( _RO_ = Read-Only).
 
 ## PI Dynamic Array subroutines
 
-\<\<TBC\>\>
-
-CALL _!SUBROUTINE_(params...)
+CALL _!SUBROUTINE_(params...) [or CALL _&ndash;SUBROUTINE_(params...)]
 
 | Subroutine | Equivalent Basic Function |
 |-|-|
+| !ADDS(return.array, array1, array2) | ADDS |
+| !ANDS(return.array, array1, array2) | ANDS |
+| !CATS(return.array, array1, array2) | CATS |
+| !CHARS(return.array, array1) | CHARS |
+| !CLEAR.PROMPTS | CLEARPROMPTS |
+| !COUNTS(return.array, dynamic.array, substring) | COUNTS |
+| !DISLEN(return.array, dynamic.array [,mapname]) | LENDP |
+| !DIVS(return.array, array1, array2) | DIVS |
+| !EQS(return.array, array1, array2) | EQS |
+| !FADD(return.array, array1, array2) | FADD |
+| !FDIV(return.array, array1, array2) | FDIV |
+| !FIELDS(return.array, dynamic.array, delimiter, occurrence,num.substr) | FIELDS |
+| !FMTS(return.array, dynamic.array, format) | FMTS |
+| !FMUL(return.array, number1, number2) | FMUL |
+| !FOLD(subdivided.string, string, length) | FOLD |
+| !FSUB(result, number1, number2) | FSUB |
+| !GES(return.array, array1, array2) | GES |
+| !GTS(return.array, array1, array2) | GTS |
+| !ICONVS(return.array, dynamic.array, conversion) | ICONVS |
+| !IFS(return.array, dynamic.array, true.array, false.array) | IFS |
+| !INDEXS(return.array, dynamic.array, substring, occurrence) | INDEXS |
+| !LENS(return.array, dynamic.array) | LENS |
+| !LENSDP(return.array, dynamic.array [,mapname]) | LENSDP |
+| !LES(return.array, array1, array2) | LES |
+| !LTS(return.array, array1, array2) | LTS |
+| !MAXIMUM(result, dynamic.array) | MAXIMUM |
+| !MINIMUM(result, dynamic.array) | MINIMUM |
+| !MODS(return.array, array1, array2) | MODS |
+| !MULS(return.array, array1, array2) | MULS |
+| !NES(return.array, array1, array2) | NES |
+| !NOTS(return.array, dynamic.array) | NOTS |
+| !NUMS(return.array, dynamic.array) | NUMS |
+| !OCONVS(return.array, dynamic.array, conversion) | OCONVS |
+| !ORS(return.array, array1, array2) | ORS |
+| !SEQS(return.array, dynamic.array) | SEQS |
+| !SPACES(return.array, dynamic.array) | SPACES |
+| !SPLICE(return.array, array1, expression, array2) | SPLICE |
+| !STRS(return.array, dynamic.array, repeat) | STRS |
+| !SUBS(return.array, array1, array2) | SUBS |
+| !SUBSTRINGS(return.array, dynamic.array, start, length) | SUBSTRINGS |
+| !SUMMATION(result , dynamic.array ) | SUMMATION |
 | !ASYNC(key, line, data, count, carrier) _;* !AMLC_ | |
 | !EDIT.INPUT(keys, wcol, wrow, wwidth, buffer, startpos, bwidth, ftable, code) | |
 | !ERRNO(variable) | |
@@ -811,50 +937,11 @@ CALL _!SUBROUTINE_(params...)
 | !REPORT.ERROR(command, subroutine, code) | |
 | !SET.PTR(print.channel, width, length, top.margin, bottom.margin, mode, options) | |
 | !SETPU(key, print.channel, new.value, return.code) | |
+| !SQUOTE(quoted.expression, expression) | |
+| !SLEEP$(variable) | |
 | !TIMDAT(variable) | |
 | !USER.TYPE(type, admin) | |
 | !VOC.PATHNAME(data/dict, voc.entry, result, status) | |
-| !ADDS(return.array, array1, array2) | ADDS |
-| !ANDS(return.array, array1, array2) | ANDS |
-| !CATS(return.array, array1, array2) | CATS |
-| !CHARS(return.array, array1) | CHARS |
-| !CLEAR.PROMPTS | CLEARPROMPTS |
-| !COUNTS(return.array, dynamic.array, substring) | COUNTS |
-| !DISLEN(return.array, dynamic.array [,mapname]) | LENDP |
-| !DIVS(return.array, array1, array2) | DIVS |
-| !EQS(return.array, array1, array2) | EQS |
-| !FADD(return.array, array1, array2) | FADD |
-| !FDIV(return.array, array1, array2) | FDIV |
-| !FIELDS(return.array, dynamic.array, delimiter, occurrence,num.substr) | FIELDS |
-| !FMTS(return.array, dynamic.array, format) | FMTS |
-| !FMUL(return.array, number1, number2) | FMUL |
-| !FOLD(subdivided.string, string, length) | FOLD |
-| !FSUB(result, number1, number2) | FSUB |
-| !GES(return.array, array1, array2) | GES |
-| !GTS(return.array, array1, array2) | GTS |
-| !ICONVS | ICONVS |
-| !IFS | IFS |
-| !INDEXS | INDEXS |
-| !LENS(return.array, dynamic.array) | LENS |
-| ??!LENSDP(return.array, dynamic.array [,mapname]) | LENSDP |
-| !LES | LES |
-| !LTS | LTS |
-| !MAXIMUM | MAXIMUM |
-| !MINIMUM | MINIMUM |
-| !MODS | MODS |
-| !MULS | MULS |
-| !NES | NES |
-| !NOTS | NOTS |
-| !NUMS | NUMS |
-| !OCONVS | OCONVS |
-| !ORS | ORS |
-| !SEQS | SEQS |
-| !SPACES | SPACES |
-| !SPLICE | SPLICE |
-| !STRS | STRS |
-| !SUBS | SUBS |
-| !SUBSTRINGS | SUBSTRINGS |
-| !SUMMATION | SUMMATION |
 
 ## Special SYSTEM() functions
 
