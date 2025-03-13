@@ -24,7 +24,7 @@ Run as super user
 | &dash;C | | Displays the licencing _configuration_ code – Must be the only option in the command line |
 | &dash;d | integer | Sets _device licensing_ number of connections per user [default: 10] |
 | &dash;e | mm/dd/yyyy | Sets expiry date of the licence (NB. US (Un-Sortable) date format) [default: 1/1/2500] |
-| &dash;h | | Displays Help message |
+| &dash;h | | Displays usage help message |
 | &dash;k | | Resets master encryption key [tbc] the MAXKEYSIZE value to 255 |
 | &dash;m | params | Sets the master encryption key. Known admissable params: |
 | | | SYSTEM &mdash; use system default master key |
