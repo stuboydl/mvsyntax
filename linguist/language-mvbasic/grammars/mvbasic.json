@@ -1,122 +1,123 @@
 {
    "name": "Rocket Universe MV BASIC",
-   "scopeName": "source.rocket-mv-basic",
+   "scopeName": "source.mvbasic",
    "fileTypes": [
+      "mvb",
       "bas",
       "basic"
    ],
    "patterns": [
       {
-         "name": "comment.line.rocket-mv-basic",
+         "name": "comment.line.mvbasic",
          "match": "(?<=(^\\S+:|^\\d+:?|;)\\s*|^\\s*)(\\*|!|rem|\\$\\*).*$"
       },
       {
-         "name": "keyword.compiler.rocket-mv-basic",
+         "name": "keyword.compiler.mvbasic",
          "match": "(?i)\\b(common|deffun|dim(ension)?|function|prog(ram)?|sub(routine)?|(\\#|\\$)?include|\\$chain|\\$copyright|\\$define|\\$eject|\\$page|\\$ifdef|\\$ifndef|\\$insert|\\$map|\\$options|\\$page|\\$eject|equate|null|\\$undefine)\\b"
       },
       {
-         "name": "keyword.compiler.rocket-mv-basic",
+         "name": "keyword.compiler.mvbasic",
          "match": "(?i)\\b(assigned|clear|let|mat|unassigned)\\b"
       },
       {
-         "name": "keyword.control.rocket-mv-basic",
+         "name": "keyword.control.mvbasic",
          "match": "(?i)\\b(abort|begin|call|case|chain|continue|else|end|enter|execute|exit|for|go\\s?(sub|to)?|if|loop|next|on|perform|repeat|return\\(?|step|stop|subr|then|while|until)\\b"
       },
       {
-         "name": "keyword.control.rocket-mv-basic",
+         "name": "keyword.control.mvbasic",
          "match": "(?i)\\b(authorization|transaction|bscan|clearfile|close|commit|deleteu?|filelock|fileunlock|indices|matread|matread(l|u)?|matwriteu?|open|openpath|procread|procwrite|read(l|u)?|readv(l|u)?|recordlocked|recordlock(l|u)?|release|rollback|isolation|level|trans|start|writeu?|writevu?|xlate)\\b"
       },
       {
-         "name": "keyword.compiler.rocket-mv-basic",
+         "name": "keyword.compiler.mvbasic",
          "match": "(?i)\\b(closeseq|create|flush|getx?|nobuf|openseq|readblk|readseq|seek|send|status|timeout|ttyctl|ttyget|ttyset|weofseq|writeblk|writeseqf?)\\b"
       },
       {
-         "name": "keyword.compiler.rocket-mv-basic",
+         "name": "keyword.compiler.mvbasic",
          "match": "(?i)\\b(\\@\\(.+\\)|break|cleardata|crt|data|display|echo|footing|heading|hush|input(clear|disp|err|null|trap)?|key(edit|exit|in|trap)?|opendev|print(err?)?|on|off|reset|prompt|tabstop|terminfo|tparm|tprint)\\b"
       },
       {
-         "name": "keyword.compiler.rocket-mv-basic",
+         "name": "keyword.compiler.mvbasic",
          "match": "(?i)\\b(off|on|reset)\\b"
       },
       {
-         "name": "keyword.tape.rocket-mv-basic",
+         "name": "keyword.tape.mvbasic",
          "match": "(?i)\\b(readt|rewind|weof|writet)\\b"
       },
       {
-         "name": "keyword.compiler.rocket-mv-basic",
+         "name": "keyword.compiler.mvbasic",
          "match": "(?i)\\b(clearselect|deletelist|getlist|readlist|readnext|select(e|n|v|index|info)?|sselect(n|v)?|writelist)\\b"
       },
       {
-         "name": "keyword.compiler.rocket-mv-basic",
+         "name": "keyword.compiler.mvbasic",
          "match": "(?i)\\b(alpha|cats|change|checksum|col1|col2|compare|convert|convert|count|counts|dcount|del|delete|downcase|dquote|ereplace|exchange|extract|field|fields|fieldstore|find|findstr|fold|getrem|group|groupstore|index|indexs|ins|insert|left|len|lens|locate|lower|matbuild|matchfield|matparse|quote|raise|remove|remove|revremove|replace|reuse|right|setrem|soundex|space|spaces|splice|squote|str|strs|substrings|trim|trimb|trimbs|trimf|trimfs|trims|upcase)\\b"
       },
       {
-         "name": "keyword.compiler.rocket-mv-basic",
+         "name": "keyword.compiler.mvbasic",
          "match": "(?i)\\b(ascii|char|chars|dtx|ebcdic|fix|fmt|fmts|iconv|iconvs|oconv|oconvs|precision|seq|seqs|xtd)\\b"
       },
       {
-         "name": "keyword.compiler.rocket-mv-basic",
+         "name": "keyword.compiler.mvbasic",
          "match": "(?i)\\b(auxmap|byte(len|type|val)?|fmtdp|fmtsdp|folddp|getlocale|inputdisp|lendp|lensdp|localeinfo|setlocale|unichars?|uniseqs?|uprint)\\b"
       },
       {
-         "name": "keyword.compiler.rocket-mv-basic",
+         "name": "keyword.compiler.mvbasic",
          "match": "(?i)\\b(abss?|acos|adds|asin|atan|bitand|bitnot|bitor|bitreset|bitset|bittest|bitxor|cosh?|divs?|exp|int|fadd|fdiv|ffix|fflt|fmul|fsub|ln|maximum|minimum|mods?|muls|negs?|nums?|pwr|randomize|real|rnd|sadd|scmp|sdiv|sinh?|smul|sqrt|ssub|subs|sum|summation|tanh?)\\b"
       },
       {
-         "name": "keyword.operator.rocket-mv-basic",
+         "name": "keyword.operator.mvbasic",
          "match": "(?i)\\b(and?|eqs?|ges?|gts?|ifs|isnulls?|les?|lts?|nes?|nots?|mods?|ors?|[\\+\\-\\*\\/\\^\\:\\=\\#\\<\\>\\&\\!])\\b"
       },
       {
-         "name": "keyword.vector.rocket-mv-basic",
+         "name": "keyword.vector.mvbasic",
          "match": "(?i)\\b(date|datetime(l|z)?|debug|errmsg|gcdistance|inmat|itype|lock|nap|now|sentence|sleep|status|system|time(date)?|todate(time)?|totime|unlock|userinfo)\\b"
       },
       {
-         "name": "keyword.compiler.rocket-mv-basic",
+         "name": "keyword.compiler.mvbasic",
          "match": "(?i)\\b(rpc\\.call|rpc\\.connect|rpc\\.disconnect)\\b"
       },
       {
-         "name": "keyword.compiler.rocket-mv-basic",
+         "name": "keyword.compiler.mvbasic",
          "match": "(?i)\\b(clearprompts|eof\\(arg\\.\\)|fileinfo|ilprompt|get\\(arg\\.\\)|seek\\(arg\\.\\))\\b"
       },
       {
-         "name": "string.quoted.double.rocket-mv-basic",
+         "name": "string.quoted.double.mvbasic",
          "begin": "\"",
          "end": "\"",
          "patterns": [
             {
-               "name": "constant.character.escape.rocket-mv-basic",
+               "name": "constant.character.escape.mvbasic",
                "match": "\\\\."
             }
          ]
       },
       {
-         "name": "string.quoted.single.rocket-mv-basic",
+         "name": "string.quoted.single.mvbasic",
          "begin": "'",
          "end": "'",
          "patterns": [
             {
-               "name": "constant.character.escape.rocket-mv-basic",
+               "name": "constant.character.escape.mvbasic",
                "match": "\\\\."
             }
          ]
       },
       {
-         "name": "string.quoted.slush.rocket-mv-basic",
+         "name": "string.quoted.slush.mvbasic",
          "begin": "\\",
          "end": "\\",
          "patterns": [
             {
-               "name": "constant.character.escape.rocket-mv-basic",
+               "name": "constant.character.escape.mvbasic",
                "match": "\\\\."
             }
          ]
       },
       {
-         "name": "constant.numeric.rocket-mv-basic",
+         "name": "constant.numeric.mvbasic",
          "match": "\\b([0-9]+\\.?[0-9]*|\\.?[0-9]+)([eE][-+]?[0-9]+)?\\b"
       },
       {
-         "name": "variable.other.rocket-mv-basic",
+         "name": "variable.other.mvbasic",
          "match": "(?i)[A-Z][A-Z0-9\\.]*"
       }
    ],
@@ -124,15 +125,15 @@
       "numbers": {
          "patterns": [
             {
-               "name": "constant.numeric.integer.rocket-mv-basic",
+               "name": "constant.numeric.integer.mvbasic",
                "match": "\\b\\d+\\b"
             },
             {
-               "name": "constant.numeric.float.rocket-mv-basic",
+               "name": "constant.numeric.float.mvbasic",
                "match": "\\b\\d*\\.\\d+\\b"
             },
             {
-               "name": "constant.numeric.scientific.rocket-mv-basic",
+               "name": "constant.numeric.scientific.mvbasic",
                "match": "\\b\\d*\\.?\\d+[eE][-+]?\\d+\\b"
             }
          ]

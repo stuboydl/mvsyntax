@@ -27,7 +27,7 @@
 > expression **-** expression  
 > expression **\*** expression  
 > expression **/** expression  
-> expression **^** expression  _;* (**)_
+> expression **^** expression  _;* (\*\*)_
 
 ### Compound Assignment Operators
 
@@ -57,9 +57,9 @@
 
 ### String Operators
 
-> expression **:** expression  
-> expression **[** [ start,] [-]length **]**  
-> expression **[** delimiter, occurrence, fields **]** _;* FIELD(delimiter, occurrence, fields)_
+> expression **:** expression
+> expression **[** [ start,] length **]**  ;* _extract & assignment; eg `var[s,l] = exp`._
+> expression **[** char, [-]occurrence, fields **]** _;* extract & assignment; eg `var[c,o,f] = exp`. See also [FIELD()](#f)_
 
 #### Equivalent Dynamic Array Logical and Relational Functions
 
@@ -1001,6 +1001,145 @@ program example.assignations
   print "Back on user's terminal"
 end
 ~~~
+
+## Access
+
+### Command Prompt
+
+| Command | Action |
+|-|-|
+| LOGTO| accountname Change to a different MV account |
+| LO| Log out of the system |
+| HELP| View user help via help menu |
+| LISTUSER| List users on the system |
+| CS| Clear screen |
+| LIST.READU| List items locked |
+| TERM| Show terminal characteristics |
+
+### Command Stack
+
+| Command | Action |
+|-|-|
+| .L{n} | List _n_ commands in history |
+| .X{n} | Execute command _n_ in the stack |
+| .D{n} | Delete command _n_ from the stack |
+| .Rn | Recall _n_ to top  |
+| .C{n}/from/to | Change string “from” to “to” in command _n_ |
+| .C{n}/from/to/G | Same, but all occurrences of “from” |
+| .A{n} extra | Add “extra” to end of line _n_ |
+| .S name n | Save command _n_ as a VOC entry “name” |
+
+### Query Operators
+
+Used to relate field to field or field to criteria WITH field Operator field or WITH field Operator “criteria”
+
+| Symbol | Synonyms | Description |
+|-|-|-|
+| = | EQ | Equal to |
+| # | <>, >;<, NE | Not equal to |
+| > | GT, AFTER | Greater than |
+| < | LT, BEFORE | Lesser than |
+| >= | =>, GE | Greater than or equal to |
+| <= |  =<, LE | Lesser than or equal to |
+| LIKE | MATCHES, MATCHING | Finds a matching word (… is a wildcard) |
+| UNLIKE | NOT.MATCHING | Finds not matching word (… is a Wildcard) |
+| SPOKEN | SAID, ~ | Phonetic matching (Universe only) |
+
+### Query functions
+
+Querying the data files. Multiple criteria can be specified with `AND` or `OR`. Sort order can be `BY` (ascending) or `BY.DNSD` (descending). Multi-values for a field can also be sorted `BY.EXP` (ascending) or `BY.EXP.DSND` (descending). Output may be to screen (default) or a line printer (`LPTR`) or some other defined device. Paginates by default page size for the device (See `TERM`)
+
+| Command | Description|
+|-|-|
+| LIST CLIENTS | Prints an unordered list of all CLIENTS records with all the defined default fields. |
+| LIST ONLY CLIENTS | Unordered list of all CLIENTS primary key with default fields suppressed |
+| LIST CUSTOMERS NAME STOREPHONE ID.SUP | List customer name and store phone numbers suppressing the primary key |
+| ID.SUP | modifier suppresses the primary key from display. AKA `ID-SUPP` |
+| SORT ... | Same as LIST, but in primary key order |
+| COUNT CLIENTS | Display count of all records in CLIENTS |
+| COUNT ORDERS IF DATE = “04-JAN-2022” | Display count of ORDERS based on criteria |
+| LIST CUSTOMERS IF CITY = “Sydney” | List CUSTOMERS with default fields based on criteria |
+| SORT CUSTOMERS IF POSTAL.CODE LIKE “4N” | List CUSTOMERS with default fields based on criteria by primary key order |
+| LIST PRODUCTS BY PRICE BY DESC | Sorts PRODUCTS with default fields in ascending PRICE order then by DESCRIPTION |
+| LIST ORDERS BY.DSND DATE | List all ORDERS with default fields in descending DATE order |
+| LIST ORDERS IF CUSTID = “7279” BY.DSND DATE | List ORDERS with default fields for customer number 7279 in descending date order |
+| LIST ONLY CUSTOMERS IF POSTAL.CODE UNLIKE “4N” | List of customer primary keys that do not have a 5 digit zip |
+| LIST ORDERS IF SHIPPED = DATE | List orders default fields for those that had items that shipped the day the order was entered |
+| LIST ORDERS BY.EXP PRODID PRODID DESC QTY | List orders, showing the multiple products of all the orders sorted by the product id displaying the order primary key, product id, description and ship quantity |
+| LIST ORDERS BY.EXP PRODID BREAK.ON PRODID DESC TOTAL QTY | List orders exploding out the products and printing a total when the product id changes |
+| LIST ORDERS BY.EXP PRODID BREAK.ON PRODID DESC TOTAL QTY DET.SUP | List orders exploding out the products and only printing one total line each time product id changes |
+| LIST CUSTOMERS ... HEADING “Customers List” | Add a heading to a report |
+| LIST CUSTOMERS ... FOOTING “Customer List” | Add a footing to a report |
+
+### Command line formatting
+
+These query commands allow a file to be queried and listed altering the existing field definitions content (`EVAL`), conversion (`CONV`), format (`FMT`) and or column heading (`COL.HDG` aka `AS`).
+
+| Command | Description |
+|-|-|
+| LIST CUSTOMERS EVAL “@RECORD<1>” | List all CUSTOMERS records displaying the primary key and first field |
+| LIST VENDORS NAME CONV “MCT” | List VENDORS primary key and name with name converted to title case |
+| LIST ORDERS NAME FMT “55L” | List ORDERS with NAME left justified in 55 characters (longer names will wrap) |
+| LIST PRODUCTS DESC AS “Type of fruit” | List PRODUCTS primary key and description with heading "Type of fruit" |
+
+### Select lists
+
+Lists can be saved (`SAVE.LIST`), manipulated (`EDIT.LIST`) and retrieved (`GET.LIST`). The select buffer will limit the subsequent query function or application process to those primary keys in the buffer.
+
+| Command | Description |
+|-|-|
+| SELECT CUSTOMERS | Selects all CUSTOMERS primary keys to the select buffer |
+| SELECT COMPANIES WITH CITY = “LONDON” | Selects COMPANIES in LONDON primary keys to the select buffer |
+| SAVE.LIST MY.LIST | Save the select buffer to a list called MY.LIST |
+| GET.LIST MY.LIST | Load the list named MY.LIST to the current select buffer |
+| EDIT.LIST MY.LIST | Invokes ED on the named list (same as ED &SAVEDLISTS& MY.LIST) |
+
+### Editing records with AE
+
+Command Description
+P Display next page of item lines
+Q Quit out of record
+I Enter Insert mode after current line. Press <Enter> on blank line to exit back to command mode
+I data Insert “data” after current line
+n (a number) Move to line n of the item if it exists.
++n OR -n Move ahead n lines or back n lines
+T Move to top of item
+B Move to bottom of item
+.C/from/to Change the first occurrence “from” to “to” in line
+.C/from/to/n Change the next n lines first occurrence of “from” to “to”
+C/from/to/nG Change the next n lines all occurrences of “from” to “to”. The n if not specified will be considered 1.
+A data Append “data” to end of statement. Use a second space if space “data” is to be appended.
+B string Break the current line after string making string the end of the current line
+CAT Concatenate next line to the end of the current line (opposite of B above)
+Dn Delete n lines. I n not specified will be considered 1
+DUP Duplicate and insert current line after current line
+L string Locate string
+< AND > Start a block AND End a block
+COPY/MOVE/DROP Copy, move, drop (delete) the block
+SAVE Save changes to the item
+.X &ED&macro Execute macro as saved in &ED& file
+XEQ command Execute command and return back to editor
+DICT fields
+Field Number Line of the database record
+Formula Interactive functions and statements
+Conversion Blank field unless a computer conversion is needed to display data in human format such as date, time and money
+Column Header Title that appears at the top of the column if horizontal or front of row if vertical
+Format Column format specified by number and justification 8R – 8 characters right justified, 5L – 5 characters left justified,
+15T – 15 characters left justified and word wrapped at 15 characters
+Single or Multi S – Single value field (default if not specified), M – Multi-valued field
+Data Fields (D-Type) Interactive (I-Type) Phrase
+0001 D I PH
+0002 Field Number Formula Fields
+0003 Conversion Conversion Not applicable
+0004 Column Header Column Header Not applicable
+0005 Format Format Not applicable
+0006 Single or Multi Single or Multi Not applicable
+Index Commands (Be aware, INDEX affects current users. DO NOT UPDATE while database active)
+Command Description
+CREATE.INDEX filename fieldname Create an index on filename using the DICT fieldname
+BUILD.INDEX filename fieldname Update the index on filename built from the DICT fieldname
+DELETE.INDEX filename fieldname Delete an index on filename called fieldname
+LIST.INDEX filename fieldname/ALL List indexes on filename for a specified fieldname or all indexes
 
 ---
 The end

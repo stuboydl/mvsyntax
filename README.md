@@ -12,16 +12,58 @@ The repository covers a range of topics related to multivalue database syntaxes 
 
 - Beyond-Compare
 - Linguist
-- VS Code
 - Rocket Software
   - UniVerse
   - UniData
   - jBase
   - D3
+- Visual Studio Code
 
 See the Rocket Software website for more information on UniVerse, UniData, jBase, D3, mvBase, OpenQM and multivalue in general here <https://www.rocketsoftware.com/products/rocket-multivalue-application-development-platform/all-products>
 Documentation <https://docs.rocketsoftware.com>
 Forums <https://community.rocketsoftware.com/home>
+
+## Beyond Compare
+
+[Beyond Compare](https://www.scootersoftware.com/) is a commercial utility for comparing, diffing, merging, and synchronizing files and folders. It supports various environments, file types, syntax highlighting, filters, and scripting.
+
+The BCFileFormats.xml file may be imported into Beyond Compare to provide syntax highlighting and comparison rules for mvBasic and mv data.
+
+![bc sample](beyond-compare/bcsample.png)
+
+## Linguist
+
+The Linguist library is used on GitHub.com to detect blob languages, ignore binary or vendored files, suppress generated files in diffs, and generate language breakdown graphs.
+
+When committing any mvBasic to GitHub, Use `* linguist-language=mvBasic` in your `.gitattributes` file to explicitly indicate the language is mvBasic.
+
+As most mvBasic files don't have any specific identifier, such as a well-known filename extension or header _shebang_ line [although the _SUBROUTINE/PROGRAM_ keywords may be taken into consideration??], using this enables Linguist to identify the language type.
+
+By specifying the associated file types in the `.gitattributes` file, Linguist will use that to explicitly identify miscellaneous files.
+
+For example, if you have both Python and mvBasic files in your main branch, you can identify Python code by its extension and everything else as mvBasic:
+
+> `# Example of a '.gitattributes' file which classifies '.py' files as Python and everything else as mvBasic:`
+> `*.py linguist-language=python`
+> `* linguist-language=mvbasic`
+
+If Linguist doesn't have anything else to go by it will use heuristics and naïve Bayesian classification to attempt to identify the file type.
+
+## Rocket Software
+
+## Visual Studio Code
+
+[VS Code](https://visualstudio.microsoft.com/#vscode-section) is a free standalone source code editor that runs on Windows, macOS, and Linux. The top pick for mvBasic developers, with extensions to support most programming languages and a vast range of utility extensions.
+
+This opens mv programming to the world of modern programming editing tools and utilities including AI assistants that work with MV environments.
+
+Recommended extensions include:
+
+* [mv Basic](https://marketplace.visualstudio.com/items?itemName=MVExtensions.mvbasic) - mvBasic programming syntax and utilities.
+* [Pickdate!](https://marketplace.visualstudio.com/items?itemName=stuboydl.vscode-pickdate) - _Pick_ internal date & time.
+* [Better align](https://marketplace.visualstudio.com/items?itemName=Chouzz.vscode-better-align) - select and align code.
+* [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) extension for accessing your code base through SSH.
+* [Github Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot) - AI assistant.
 
 ## Keywords
 

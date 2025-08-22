@@ -1,0 +1,10 @@
+{
+  "name": "language-mvbasic",
+  "version": "1.0.0",
+  "description": "Syntax highlighting for the mvBasic family of programming languages",
+  "repository": "https://github.com/telnet23/language-basic",
+  "license": "MIT",
+  "dependencies": {
+    "language-mvbasic": "file:"
+  }
+}
